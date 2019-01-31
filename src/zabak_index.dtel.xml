@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZABAK_INDEX</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>NUMC3</DOMNAME>
+    <HEADLEN>20</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>abaK Index</DDTEXT>
+    <REPTEXT>Index</REPTEXT>
+    <SCRTEXT_S>Index</SCRTEXT_S>
+    <SCRTEXT_M>Index</SCRTEXT_M>
+    <SCRTEXT_L>Index</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>1</LANGU>
+    <LANGU>2</LANGU>
+    <LANGU>3</LANGU>
+    <LANGU>A</LANGU>
+    <LANGU>F</LANGU>
+    <LANGU>G</LANGU>
+    <LANGU>I</LANGU>
+    <LANGU>J</LANGU>
+    <LANGU>L</LANGU>
+    <LANGU>M</LANGU>
+    <LANGU>N</LANGU>
+    <LANGU>P</LANGU>
+    <LANGU>R</LANGU>
+    <LANGU>S</LANGU>
+    <LANGU>T</LANGU>
+    <LANGU>U</LANGU>
+    <LANGU>W</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>1</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>2</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>A</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>F</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>G</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>I</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>J</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>L</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>M</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>N</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>R</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>T</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>U</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>W</DDLANGUAGE>
+     <DDTEXT>Global consts counter</DDTEXT>
+     <REPTEXT>Counter</REPTEXT>
+     <SCRTEXT_S>Counter</SCRTEXT_S>
+     <SCRTEXT_M>Counter</SCRTEXT_M>
+     <SCRTEXT_L>Counter</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

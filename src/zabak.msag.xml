@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZABAK</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>abaK messages</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>Invalid parameters</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Error opening file &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Invalid sign &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Invalid option &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>For option &amp; the HIGH value must be empty</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>For option &amp; both LOW and HIGH values must be filled</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>For option &amp; HIGH &amp; must be &gt; LOW &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Format of table &amp; is not valid. Please check documentation.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>Unexpected error</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Value not found for scope &amp; field &amp; context &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>HTTP error &amp; &amp; url &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Not implemented</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

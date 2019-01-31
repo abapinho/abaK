@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_PINF" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <PINF>
+    <ATTRIBUTES>
+     <INTF_NAME>ZABAK_API</INTF_NAME>
+     <DESCRIPT>abaK API</DESCRIPT>
+    </ATTRIBUTES>
+    <ELEMENTS>
+     <SCOMELDTLN>
+      <INTF_NAME>ZABAK_API</INTF_NAME>
+      <ELEM_TYPE>CLAS</ELEM_TYPE>
+      <ELEM_KEY>ZCL_ABAK_FACTORY</ELEM_KEY>
+     </SCOMELDTLN>
+     <SCOMELDTLN>
+      <INTF_NAME>ZABAK_API</INTF_NAME>
+      <ELEM_TYPE>DTEL</ELEM_TYPE>
+      <ELEM_KEY>ZABAK_CONTENT_TYPE</ELEM_KEY>
+     </SCOMELDTLN>
+     <SCOMELDTLN>
+      <INTF_NAME>ZABAK_API</INTF_NAME>
+      <ELEM_TYPE>DTEL</ELEM_TYPE>
+      <ELEM_KEY>ZABAK_CONTEXT</ELEM_KEY>
+     </SCOMELDTLN>
+     <SCOMELDTLN>
+      <INTF_NAME>ZABAK_API</INTF_NAME>
+      <ELEM_TYPE>DTEL</ELEM_TYPE>
+      <ELEM_KEY>ZABAK_FORMAT_TYPE</ELEM_KEY>
+     </SCOMELDTLN>
+     <SCOMELDTLN>
+      <INTF_NAME>ZABAK_API</INTF_NAME>
+      <ELEM_TYPE>DTEL</ELEM_TYPE>
+      <ELEM_KEY>ZABAK_ID</ELEM_KEY>
+     </SCOMELDTLN>
+     <SCOMELDTLN>
+      <INTF_NAME>ZABAK_API</INTF_NAME>
+      <ELEM_TYPE>DTEL</ELEM_TYPE>
+      <ELEM_KEY>ZABAK_SCOPE</ELEM_KEY>
+     </SCOMELDTLN>
+     <SCOMELDTLN>
+      <INTF_NAME>ZABAK_API</INTF_NAME>
+      <ELEM_TYPE>INTF</ELEM_TYPE>
+      <ELEM_KEY>ZIF_ABAK</ELEM_KEY>
+     </SCOMELDTLN>
+     <SCOMELDTLN>
+      <INTF_NAME>ZABAK_API</INTF_NAME>
+      <ELEM_TYPE>TTYP</ELEM_TYPE>
+      <ELEM_KEY>ZABAK_RANGE_T</ELEM_KEY>
+     </SCOMELDTLN>
+    </ELEMENTS>
+   </PINF>
+  </asx:values>
+ </asx:abap>
+</abapGit>

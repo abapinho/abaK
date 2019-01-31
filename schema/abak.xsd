@@ -1,0 +1,75 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="abak" type="abakType"/>
+  <xs:complexType name="vType">
+    <xs:attribute name="sign" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="I"></xs:enumeration>
+          <xs:enumeration value="E"></xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="option" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EQ"></xs:enumeration>
+          <xs:enumeration value="NE"></xs:enumeration>
+          <xs:enumeration value="BT"></xs:enumeration>
+          <xs:enumeration value="NB"></xs:enumeration>
+          <xs:enumeration value="CP"></xs:enumeration>
+          <xs:enumeration value="NP"></xs:enumeration>
+          <xs:enumeration value="LT"></xs:enumeration>
+          <xs:enumeration value="LE"></xs:enumeration>
+          <xs:enumeration value="GT"></xs:enumeration>
+          <xs:enumeration value="GE"></xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="low" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="200"></xs:maxLength>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="high" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="200"></xs:maxLength>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="kType">
+    <xs:sequence>
+      <xs:element type="vType" name="v" maxOccurs="unbounded" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="scope" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="40"></xs:maxLength>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="fieldname" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="30"></xs:maxLength>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="context">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="40"></xs:maxLength>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="abakType">
+    <xs:sequence>
+      <xs:element type="kType" name="k"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="name"/>
+  </xs:complexType>
+</xs:schema>

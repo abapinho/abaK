@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SHMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREA_ATTRIBUTES>
+    <AREA_NAME>ZCL_ABAK_SHM_AREA</AREA_NAME>
+    <DESCRIPT>abaK database shared memory area</DESCRIPT>
+    <ROOT>ZCL_ABAK_SHM_ROOT</ROOT>
+    <HAS_VERSIONS>X</HAS_VERSIONS>
+    <LIFE_CONTEXT>109200001</LIFE_CONTEXT>
+    <PROPAGATION_KIND>159200000</PROPAGATION_KIND>
+    <DISPLACE_KIND>1208200200</DISPLACE_KIND>
+    <BUILD_KIND>1107197100</BUILD_KIND>
+   </AREA_ATTRIBUTES>
+  </asx:values>
+ </asx:abap>
+</abapGit>
