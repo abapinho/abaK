@@ -4,29 +4,21 @@
   <tt:root name="CONSTANTS" type="ddic:ZABAK_XML_K_T"/>
   <tt:template>
     <abak>
-      <tt:cond>
-        <tt:attribute name="name" value-ref=".NAME"/>
-      </tt:cond>
+      <tt:cond><tt:attribute name="name" value-ref=".NAME"/></tt:cond>
       <tt:loop ref=".CONSTANTS">
         <k>
-          <tt:attribute name="scope" value-ref="SCOPE"/>
+          <tt:d-cond><tt:attribute name="scope" value-ref="SCOPE"/></tt:d-cond>
           <tt:attribute name="fieldname" value-ref="FIELDNAME"/>
-          <tt:d-cond>
-            <tt:attribute name="context" value-ref="CONTEXT"/>
-          </tt:d-cond>
-          <tt:d-cond>
-            <!-- This is an inline value which defaults to a simple I EQ LOW -->
-            <tt:attribute name="value" value-ref="VALUE"/>
-          </tt:d-cond>
+          <tt:d-cond><tt:attribute name="context" value-ref="CONTEXT"/></tt:d-cond>
+          <!-- This is an inline value which defaults to a simple I EQ LOW -->
+          <tt:d-cond><tt:attribute name="value" value-ref="VALUE"/></tt:d-cond>
           <tt:loop ref="T_KV">
             <!-- While these are multiple values which can be used to define a range -->
             <v>
               <tt:attribute name="low" value-ref="LOW"/>
-              <tt:cond>
-                <tt:attribute name="sign" value-ref="SIGN"/>
-                <tt:attribute name="option" value-ref="OPTION"/>
-                <tt:attribute name="high" value-ref="HIGH"/>
-              </tt:cond>
+              <tt:cond><tt:attribute name="sign" value-ref="SIGN"/></tt:cond>
+              <tt:cond><tt:attribute name="option" value-ref="OPTION"/></tt:cond>
+              <tt:cond><tt:attribute name="high" value-ref="HIGH"/></tt:cond>
             </v>
           </tt:loop>
         </k>

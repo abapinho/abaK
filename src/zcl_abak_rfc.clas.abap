@@ -15,6 +15,12 @@ public section.
       ZCX_ABAK .
   PROTECTED SECTION.
 private section.
+
+  methods K_TO_XML_K
+    importing
+      !IT_K type ZABAK_K_T
+    returning
+      value(RT_XML_K_T) type ZABAK_XML_K_T .
 ENDCLASS.
 
 
@@ -27,7 +33,10 @@ METHOD get_data.
   DATA: s_zabak TYPE zabak,
         content TYPE string,
         o_data  TYPE REF TO zif_abak_data,
-        s_data  TYPE zabak_data.
+        s_data  TYPE zabak_data,
+        t_k     TYPE zabak_k_t,
+        t_xml_k TYPE zabak_xml_k_t,
+        name    TYPE string.
 
   SELECT SINGLE * FROM zabak INTO s_zabak WHERE id = i_id.
   IF sy-subrc <> 0.
@@ -46,14 +55,33 @@ METHOD get_data.
                                                          i_content_type = s_zabak-content_type
                                                          i_content      = content ).
 
-  s_data-t_k = o_data->get_data( ).
-  s_data-name = o_data->get_name( ).
-
+  t_xml_k = k_to_xml_k( o_data->get_data( ) ).
+  name = o_data->get_name( ).
   CALL TRANSFORMATION zabak_content_rfc
-  SOURCE root = s_data
-  RESULT XML r_serialized.
+    SOURCE constants = t_xml_k
+           name      = name
+    RESULT XML r_serialized.
 
-*  EXPORT s_data FROM s_data TO DATA BUFFER r_rfc_data_serialized.
+*  s_data-t_k = o_data->get_data( ).
+*  s_data-name = o_data->get_name( ).
+*
+*  CALL TRANSFORMATION zabak_format_xml
+*  SOURCE root = s_data
+*  RESULT XML r_serialized.
+
+ENDMETHOD.
+
+
+METHOD k_to_xml_k.
+
+  DATA: s_xml_k LIKE LINE OF rt_xml_k_t.
+
+  FIELD-SYMBOLS: <s_k> LIKE LINE OF it_k.
+
+  LOOP AT it_k ASSIGNING <s_k>.
+    MOVE-CORRESPONDING <s_k> TO s_xml_k.
+    INSERT s_xml_k INTO TABLE rt_xml_k_t.
+  ENDLOOP.
 
 ENDMETHOD.
 ENDCLASS.

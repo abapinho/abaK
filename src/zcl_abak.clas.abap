@@ -124,7 +124,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
           textid    = zcx_abak_engine=>value_not_found
           scope     = i_scope
           fieldname = i_fieldname
-          context   = i_context.
+          context   = context.
     ENDIF.
 
   ENDMETHOD.
@@ -132,13 +132,16 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
   METHOD get_value_aux.
 
-    DATA: t_kv TYPE zabak_kv_t.
+    DATA: t_kv TYPE zabak_kv_t,
+          context type zabak_context.
 
     FIELD-SYMBOLS: <s_kv> LIKE LINE OF t_kv.
 
+    context = convert_context( i_context ).
+
     t_kv = go_data->read( i_scope     = i_scope
                           i_fieldname = i_fieldname
-                          i_context   = convert_context( i_context ) ).
+                          i_context   = context ).
 
     READ TABLE t_kv ASSIGNING <s_kv> INDEX 1.
 
@@ -151,7 +154,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
           textid    = zcx_abak_engine=>value_not_found
           scope     = i_scope
           fieldname = i_fieldname
-          context   = i_context.
+          context   = context.
     ENDIF.
 
   ENDMETHOD.

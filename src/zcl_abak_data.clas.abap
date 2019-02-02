@@ -21,10 +21,10 @@ CLASS zcl_abak_data DEFINITION
     ABSTRACT
       RAISING
         zcx_abak .
-  PRIVATE SECTION.
+private section.
 
-    CONSTANTS:
-      BEGIN OF gc_option,
+  CONSTANTS:
+    BEGIN OF gc_option,
           equal                    TYPE bapioption VALUE 'EQ',
           not_equal                TYPE bapioption VALUE 'NE',
           between                  TYPE bapioption VALUE 'BT',
@@ -36,26 +36,38 @@ CLASS zcl_abak_data DEFINITION
           greater_than             TYPE bapioption VALUE 'GT',
           greater_or_equal         TYPE bapioption VALUE 'GE',
         END OF gc_option .
-    DATA gt_k TYPE zabak_k_t .
-    DATA g_name TYPE string .
-    DATA g_loaded TYPE flag.
 
-    METHODS check_data
-      IMPORTING
-        !it_k TYPE zabak_k_t
-      RAISING
-        zcx_abak .
-    METHODS check_line
-      IMPORTING
-        !is_k TYPE zabak_k
-      RAISING
-        zcx_abak .
-    METHODS load_data
-      EXPORTING
-        !et_k TYPE zabak_k_t
-        !e_name TYPE string
-      RAISING
-        zcx_abak .
+  CONSTANTS:
+    BEGIN OF gc_sign,
+      include TYPE bapisign VALUE 'I',
+      exclude TYPE bapisign VALUE 'E',
+    END OF gc_sign.
+
+  data GT_K type ZABAK_K_T .
+  data G_NAME type STRING .
+  data G_LOADED type FLAG .
+
+  methods CHECK_DATA
+    importing
+      !IT_K type ZABAK_K_T
+    raising
+      ZCX_ABAK .
+  methods CHECK_LINE
+    importing
+      !IS_K type ZABAK_K
+    raising
+      ZCX_ABAK .
+  methods LOAD_DATA
+    exporting
+      !ET_K type ZABAK_K_T
+      !E_NAME type STRING
+    raising
+      ZCX_ABAK .
+  methods FILL_DEFAULTS
+    changing
+      !CT_K type ZABAK_K_T
+    raising
+      ZCX_ABAK .
 ENDCLASS.
 
 
@@ -145,6 +157,25 @@ CLASS ZCL_ABAK_DATA IMPLEMENTATION.
   ENDMETHOD.
 
 
+METHOD fill_defaults.
+
+  FIELD-SYMBOLS: <s_k> LIKE LINE OF ct_k,
+                 <s_kv> LIKE LINE OF <s_k>-t_kv.
+
+  LOOP AT ct_k ASSIGNING <s_k>.
+    LOOP AT <s_k>-t_kv ASSIGNING <s_kv>.
+      IF <s_kv>-sign IS INITIAL.
+        <s_kv>-sign = gc_sign-include.
+      ENDIF.
+      IF <s_kv>-option IS INITIAL.
+        <s_kv>-option = gc_option-equal.
+      ENDIF.
+    ENDLOOP.
+  ENDLOOP.
+
+ENDMETHOD.
+
+
   METHOD load_data.
 
     CLEAR: et_k, e_name.
@@ -155,6 +186,8 @@ CLASS ZCL_ABAK_DATA IMPLEMENTATION.
 
     load_data_aux( IMPORTING et_k   = gt_k
                              e_name = g_name ).
+
+    fill_defaults( CHANGING ct_k = gt_k ).
 
     check_data( gt_k ).
 

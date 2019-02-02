@@ -31,11 +31,11 @@ CLASS ZCL_ABAK_FORMAT_FACTORY IMPLEMENTATION.
       WHEN zif_abak_consts=>format_type-xml.
         CREATE OBJECT ro_instance TYPE zcl_abak_format_xml.
 
+      WHEN zif_abak_consts=>format_type-json.
+        CREATE OBJECT ro_instance TYPE zcl_abak_format_json.
+
       WHEN zif_abak_consts=>format_type-csv.
         CREATE OBJECT ro_instance TYPE zcl_abak_format_csv.
-
-      WHEN zif_abak_consts=>format_type-rfc.
-        CREATE OBJECT ro_instance TYPE zcl_abak_format_rfc.
 
       WHEN OTHERS.
         RAISE EXCEPTION TYPE zcx_abak

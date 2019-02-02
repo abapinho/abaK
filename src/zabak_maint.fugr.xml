@@ -435,27 +435,10 @@
        <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
        <CONT_NAME>TCTRL_ZABAK</CONT_NAME>
        <TYPE>TEXT</TYPE>
-       <NAME>*ZABAK-USE_SHM</NAME>
-       <TEXT>UseShrdObj______________________________</TEXT>
-       <LINE>001</LINE>
-       <COLUMN>003</COLUMN>
-       <LENGTH>040</LENGTH>
-       <VISLENGTH>010</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <FROM_DICT>X</FROM_DICT>
-       <MODIFIC>1</MODIFIC>
-       <REQU_ENTRY>N</REQU_ENTRY>
-       <TC_HEADING>X</TC_HEADING>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
-       <CONT_NAME>TCTRL_ZABAK</CONT_NAME>
-       <TYPE>TEXT</TYPE>
        <NAME>*ZABAK-FORMAT_TYPE</NAME>
        <TEXT>FormatType______________________________</TEXT>
        <LINE>001</LINE>
-       <COLUMN>004</COLUMN>
+       <COLUMN>003</COLUMN>
        <LENGTH>040</LENGTH>
        <VISLENGTH>030</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -472,7 +455,7 @@
        <NAME>*ZABAK-CONTENT_TYPE</NAME>
        <TEXT>ContntType______________________________</TEXT>
        <LINE>001</LINE>
-       <COLUMN>005</COLUMN>
+       <COLUMN>004</COLUMN>
        <LENGTH>040</LENGTH>
        <VISLENGTH>030</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -489,7 +472,7 @@
        <NAME>*ZABAK-CONTENT</NAME>
        <TEXT>Content_________________________________</TEXT>
        <LINE>001</LINE>
-       <COLUMN>006</COLUMN>
+       <COLUMN>005</COLUMN>
        <LENGTH>040</LENGTH>
        <VISLENGTH>255</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -503,16 +486,16 @@
        <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
        <CONT_NAME>TCTRL_ZABAK</CONT_NAME>
        <TYPE>TEXT</TYPE>
-       <NAME>*ZABAK-RFCDEST</NAME>
-       <TEXT>RFC_Destination_________________________</TEXT>
+       <NAME>*ZABAK-USE_SHM</NAME>
+       <TEXT>UseShrdObj______________________________</TEXT>
        <LINE>001</LINE>
-       <COLUMN>007</COLUMN>
+       <COLUMN>006</COLUMN>
        <LENGTH>040</LENGTH>
-       <VISLENGTH>032</VISLENGTH>
+       <VISLENGTH>010</VISLENGTH>
        <HEIGHT>001</HEIGHT>
        <FORMAT>CHAR</FORMAT>
        <FROM_DICT>X</FROM_DICT>
-       <MODIFIC>V</MODIFIC>
+       <MODIFIC>1</MODIFIC>
        <REQU_ENTRY>N</REQU_ENTRY>
        <TC_HEADING>X</TC_HEADING>
       </RPY_DYFATC>
@@ -571,30 +554,12 @@
       <RPY_DYFATC>
        <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
        <CONT_NAME>TCTRL_ZABAK</CONT_NAME>
-       <TYPE>CHECK</TYPE>
-       <NAME>ZABAK-USE_SHM</NAME>
-       <LINE>001</LINE>
-       <COLUMN>003</COLUMN>
-       <LENGTH>001</LENGTH>
-       <VISLENGTH>010</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <FROM_DICT>X</FROM_DICT>
-       <MODIFIC>X</MODIFIC>
-       <FOREIGNKEY>X</FOREIGNKEY>
-       <INPUT_FLD>X</INPUT_FLD>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <DICT_I_VAL>X</DICT_I_VAL>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
-       <CONT_NAME>TCTRL_ZABAK</CONT_NAME>
        <TYPE>TEMPLATE</TYPE>
        <NAME>ZABAK-FORMAT_TYPE</NAME>
        <TEXT>__________</TEXT>
        <DROPDOWN>L</DROPDOWN>
        <LINE>001</LINE>
-       <COLUMN>004</COLUMN>
+       <COLUMN>003</COLUMN>
        <LENGTH>010</LENGTH>
        <VISLENGTH>030</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -614,7 +579,7 @@
        <TEXT>__________</TEXT>
        <DROPDOWN>L</DROPDOWN>
        <LINE>001</LINE>
-       <COLUMN>005</COLUMN>
+       <COLUMN>004</COLUMN>
        <LENGTH>010</LENGTH>
        <VISLENGTH>030</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -633,7 +598,7 @@
        <NAME>ZABAK-CONTENT</NAME>
        <TEXT>____________________________________________________________________________________________________________________________________</TEXT>
        <LINE>001</LINE>
-       <COLUMN>006</COLUMN>
+       <COLUMN>005</COLUMN>
        <LENGTH>255</LENGTH>
        <VISLENGTH>255</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -648,22 +613,20 @@
       <RPY_DYFATC>
        <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
        <CONT_NAME>TCTRL_ZABAK</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>ZABAK-RFCDEST</NAME>
-       <TEXT>________________________________</TEXT>
+       <TYPE>CHECK</TYPE>
+       <NAME>ZABAK-USE_SHM</NAME>
        <LINE>001</LINE>
-       <COLUMN>007</COLUMN>
-       <LENGTH>032</LENGTH>
-       <VISLENGTH>032</VISLENGTH>
+       <COLUMN>006</COLUMN>
+       <LENGTH>001</LENGTH>
+       <VISLENGTH>010</VISLENGTH>
        <HEIGHT>001</HEIGHT>
        <FORMAT>CHAR</FORMAT>
        <FROM_DICT>X</FROM_DICT>
        <MODIFIC>X</MODIFIC>
-       <PARAM_ID>RFC</PARAM_ID>
-       <UP_LOWER>X</UP_LOWER>
        <FOREIGNKEY>X</FOREIGNKEY>
        <INPUT_FLD>X</INPUT_FLD>
        <OUTPUT_FLD>X</OUTPUT_FLD>
+       <DICT_I_VAL>X</DICT_I_VAL>
       </RPY_DYFATC>
      </FIELDS>
      <FLOW_LOGIC>
@@ -713,9 +676,6 @@
        <LINE>FIELD ZABAK-DESCRIPTION .</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>FIELD ZABAK-USE_SHM .</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW>
        <LINE>FIELD ZABAK-FORMAT_TYPE .</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
@@ -725,7 +685,7 @@
        <LINE>FIELD ZABAK-CONTENT .</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>FIELD ZABAK-RFCDEST .</LINE>
+       <LINE>FIELD ZABAK-USE_SHM .</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>MODULE SET_UPDATE_FLAG ON CHAIN-REQUEST.</LINE>
@@ -769,7 +729,6 @@
       <item>1</item>
       <item>3</item>
       <item>3</item>
-      <item>4</item>
       <item>4</item>
       <item>4</item>
       <item>4</item>

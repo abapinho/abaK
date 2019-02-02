@@ -1,6 +1,6 @@
 *---------------------------------------------------------------------*
 *    program for:   TABLEFRAME_ZABAK_MAINT
-*   generation date: 16.01.2019 at 17:25:08
+*   generation date: 21.01.2019 at 11:58:28
 *   view maintenance generator version: #001407#
 *---------------------------------------------------------------------*
 FUNCTION TABLEFRAME_ZABAK_MAINT        .

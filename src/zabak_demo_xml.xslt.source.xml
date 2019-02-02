@@ -1,0 +1,28 @@
+<xsl:transform version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:sap="http://www.sap.com/sapxsl">
+
+<xsl:strip-space elements="*"/>
+
+<xsl:template match="/">
+  <abak name="Nice inline XML">
+    <k scope="GLOBAL" fieldname="BUKRS" value="4321"/>
+    <k scope="PROJ1" fieldname="KOART">
+      <v sign="I" option="EQ" low="D" />
+      <v sign="I" option="EQ" low="K" />
+    </k>
+    <k scope="SD" fieldname="KUNNR" context="SCENARIO1" value="1111111111"/>
+    <k scope="SD" fieldname="KUNNR" context="SCENARIO2" value="2222222222"/>
+    <k scope="ZABAK_DEMO" fieldname="WRBTR">
+      <v sign="I" option="LT" low="1000" />
+      <v sign="I" option="BT" low="2000" high="2999" />
+      <v sign="I" option="GE" low="10000" />
+    </k>
+    <k scope="ZABAK_DEMO" fieldname="WAERS" context="PT">
+      <v sign="I" option="EQ" low="EUR" />
+      <v sign="I" option="EQ" low="USD" />
+    </k>
+  </abak>
+</xsl:template>
+
+</xsl:transform>

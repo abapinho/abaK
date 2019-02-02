@@ -1,0 +1,76 @@
+<?sap.transform simple?>
+<tt:transform xmlns:tt="http://www.sap.com/transformation-templates" xmlns:ddic="http://www.sap.com/abapxml/types/dictionary" xmlns:def="http://www.sap.com/abapxml/types/defined">
+  <tt:root name="NAME"/>
+  <tt:root name="CONSTANTS" type="ddic:ZABAK_XML_K_T"/>
+  <tt:template>
+    <object>
+      <object name="abak">
+        <tt:cond>
+          <str name="name">
+            <tt:value ref=".NAME"/>
+          </str>
+        </tt:cond>
+        <array name="k">
+          <tt:loop ref=".CONSTANTS">
+            <object>
+              <tt:group>
+                <tt:d-cond frq="?">
+                  <str name="scope">
+                    <tt:value ref="$ref.SCOPE"/>
+                  </str>
+                </tt:d-cond>
+                <tt:d-cond frq="1">
+                  <str name="fieldname">
+                    <tt:value ref="$ref.FIELDNAME"/>
+                  </str>
+                </tt:d-cond>
+                <tt:d-cond frq="?">
+                  <str name="context">
+                    <tt:value ref="$ref.CONTEXT"/>
+                  </str>
+                </tt:d-cond>
+                <!-- This is an inline value which defaults to a simple I EQ LOW -->
+                <tt:d-cond frq="?">
+                  <str name="value">
+                    <tt:value ref="$ref.VALUE"/>
+                  </str>
+                </tt:d-cond>
+                <tt:cond frq="?">
+                  <array name="v">
+                    <tt:loop ref="T_KV">
+                      <object>
+                        <tt:group>
+                          <tt:cond frq="1">
+                            <str name="low">
+                              <tt:value ref="$ref.LOW"/>
+                            </str>
+                          </tt:cond>
+                          <tt:cond frq="?">
+                            <str name="sign">
+                              <tt:value ref="$ref.SIGN"/>
+                            </str>
+                          </tt:cond>
+                          <tt:cond frq="?">
+                            <str name="option">
+                              <tt:value ref="$ref.OPTION"/>
+                            </str>
+                          </tt:cond>
+                          <tt:cond frq="?">
+                            <str name="high">
+                              <tt:value ref="$ref.HIGH"/>
+                            </str>
+                          </tt:cond>
+                        </tt:group>
+                      </object>
+                    </tt:loop>
+                  </array>
+                </tt:cond>
+              </tt:group>
+
+            </object>
+          </tt:loop>
+        </array>
+      </object>
+    </object>
+  </tt:template>
+</tt:transform>

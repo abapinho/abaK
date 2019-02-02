@@ -12,7 +12,7 @@ public section.
       !I_CONTENT_TYPE type ZABAK_CONTENT_TYPE default ZIF_ABAK_CONSTS=>CONTENT_TYPE-INLINE
       !I_CONTENT type STRING
       !I_BYPASS_CACHE type FLAG optional
-      !I_USE_SHM type ZABAK_USE_SHM
+      !I_USE_SHM type ZABAK_USE_SHM optional
     returning
       value(RO_INSTANCE) type ref to ZIF_ABAK
     raising
@@ -29,6 +29,7 @@ public section.
     importing
       !I_ID type ZABAK_ID default 'DEFAULT'
       !I_RFCDEST type RFCDEST optional
+    preferred parameter I_ID
     returning
       value(RO_INSTANCE) type ref to ZIF_ABAK
     raising
@@ -101,14 +102,12 @@ CLASS ZCL_ABAK_FACTORY IMPLEMENTATION.
 
 
   METHOD get_zabak_instance.
-
     IF i_rfcdest IS INITIAL.
       ro_instance = get_zabak_instance_local( i_id ).
     ELSE.
       ro_instance = get_zabak_instance_rfc( i_id      = i_id
                                             i_rfcdest = i_rfcdest ).
     ENDIF.
-
   ENDMETHOD.
 
 
@@ -119,7 +118,10 @@ METHOD get_zabak_instance_local.
 
   SELECT SINGLE * FROM zabak INTO s_zabak WHERE id = i_id.
   IF sy-subrc <> 0.
-    RAISE EXCEPTION TYPE zcx_abak. " TODO
+    RAISE EXCEPTION TYPE zcx_abak_factory
+      EXPORTING
+        textid = zcx_abak_factory=>id_not_found
+        id     = i_id.
   ENDIF.
 
   content = s_zabak-content.
