@@ -21,10 +21,10 @@ abaK offers a simple yet powerful and flexible way for any program to manage its
 - multiple scopes: some constants can be used system-wide while others can belong to a single program and no one else will mess with them;
 - system-wide management: constant sources are registered in a central table so that it is easy to keep track of the existing data sources; 
 - different formats: besides a database table, the constants data can be formatted as `CSV`, `XML` or `JSON`;
-- different content locations: besides providing it inline, content can be fetched from an `URL`, a server file or even `abaK` in another system; 
+- different content locations: besides providing it inline, content can be fetched from an `URL`, a server file or even another `abaK` in a remote SAP system via `RFC`; 
 - extensible: if needed, new format/content readers can be created (ex.: to read legacy data in a specific data format).  
 
-Providing a well-defined API, abaK clearly separates the way it is used from the way the constants are stored.
+Providing a well-defined `API`, `abaK` clearly separates the way it is used from the way the constants are stored.
 
 Documentation in the [wiki](https://github.com/abapinho/abak/wiki).
 
@@ -35,3 +35,4 @@ Documentation in the [wiki](https://github.com/abapinho/abak/wiki).
 ## FAQ
 For questions/comments/bugs/feature requests/wishes please create an [issue](https://github.com/abapinho/abak/issues).
 CSV
+r
