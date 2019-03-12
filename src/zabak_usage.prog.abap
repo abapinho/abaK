@@ -44,16 +44,18 @@ FORM list_subclasses.
 
   WRITE / 'Content classes (implementing ZIF_ABAK_CONTENT):'.
   t_class = go_usage->get_subclasses( 'ZIF_ABAK_CONTENT' ).
+  SORT t_class.
   LOOP AT t_class INTO class.
-    WRITE: / class INTENSIFIED OFF.
+    WRITE: /4 class INTENSIFIED OFF.
   ENDLOOP.
 
   SKIP.
 
   WRITE / 'Format classes (implementing ZIF_ABAK_FORMAT):'.
   t_class = go_usage->get_subclasses( 'ZIF_ABAK_FORMAT' ).
+  SORT t_class.
   LOOP AT t_class INTO class.
-    WRITE: / class INTENSIFIED OFF.
+    WRITE: /4 class INTENSIFIED OFF.
   ENDLOOP.
 
 ENDFORM.
@@ -66,10 +68,10 @@ FORM list_where_used.
   FORMAT INTENSIFIED OFF.
   t_tadir = go_usage->get_where_used( ).
   LOOP AT t_tadir ASSIGNING <s_tadir>.
-    WRITE: / <s_tadir>-object, <s_tadir>-obj_name, <s_tadir>-devclass.
+    WRITE: /4 <s_tadir>-object, <s_tadir>-obj_name, <s_tadir>-devclass.
   ENDLOOP.
   IF sy-subrc <> 0.
-    WRITE: / 'No objects found'.
+    WRITE: /4 'No objects found'.
   ENDIF.
   FORMAT INTENSIFIED ON.
 ENDFORM.
@@ -82,6 +84,7 @@ FORM list_zabak.
   FORMAT INTENSIFIED OFF.
   t_zabak = go_usage->get_zabak( ).
   LOOP AT t_zabak ASSIGNING <s_zabak>.
+    CLEAR <s_zabak>-mandt.
     WRITE / <s_zabak>.
   ENDLOOP.
   IF sy-subrc <> 0.

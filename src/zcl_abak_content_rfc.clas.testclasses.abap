@@ -54,7 +54,6 @@ CLASS lcl_unittest IMPLEMENTATION.
 
   METHOD valid.
     DATA: t_k       TYPE zabak_k_t,
-          name      TYPE string,
           o_format  TYPE REF TO zcl_abak_format_xml.
 
     CREATE OBJECT f_cut
@@ -64,15 +63,10 @@ CLASS lcl_unittest IMPLEMENTATION.
 
     CREATE OBJECT o_format.
 
-    o_format->zif_abak_format~convert( EXPORTING i_data = f_cut->zif_abak_content~get( )
-                                      IMPORTING et_k   = t_k
-                                                e_name = name ).
-
-    cl_abap_unit_assert=>assert_equals( exp = 'ZABAK_UNITTESTS'
-                                        act = name ).
+    t_k = o_format->zif_abak_format~convert( f_cut->zif_abak_content~get( ) ).
 
     cl_abap_unit_assert=>assert_differs( exp = 0
-                                        act = lines( t_k ) ).
+                                         act = lines( t_k ) ).
 
   ENDMETHOD.
 

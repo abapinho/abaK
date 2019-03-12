@@ -8,22 +8,21 @@ CLASS zcl_abak_data DEFINITION
   PUBLIC SECTION.
 
     INTERFACES zif_abak_data .
-  PROTECTED SECTION.
+protected section.
 
-    METHODS load_data_aux
-    ABSTRACT
-      EXPORTING
-        !et_k TYPE zabak_k_t
-        !e_name TYPE string
-      RAISING
-        zcx_abak .
-    METHODS invalidate_aux
-    ABSTRACT
-      RAISING
-        zcx_abak .
+  methods LOAD_DATA_AUX
+  abstract
+    returning
+      value(RT_K) type ZABAK_K_T
+    raising
+      ZCX_ABAK .
+  methods INVALIDATE_AUX
+  abstract
+    raising
+      ZCX_ABAK .
 private section.
 
-  CONSTANTS:
+  constants:
     BEGIN OF gc_option,
           equal                    TYPE bapioption VALUE 'EQ',
           not_equal                TYPE bapioption VALUE 'NE',
@@ -36,15 +35,12 @@ private section.
           greater_than             TYPE bapioption VALUE 'GT',
           greater_or_equal         TYPE bapioption VALUE 'GE',
         END OF gc_option .
-
-  CONSTANTS:
+  constants:
     BEGIN OF gc_sign,
       include TYPE bapisign VALUE 'I',
       exclude TYPE bapisign VALUE 'E',
-    END OF gc_sign.
-
+    END OF gc_sign .
   data GT_K type ZABAK_K_T .
-  data G_NAME type STRING .
   data G_LOADED type FLAG .
 
   methods CHECK_DATA
@@ -58,9 +54,6 @@ private section.
     raising
       ZCX_ABAK .
   methods LOAD_DATA
-    exporting
-      !ET_K type ZABAK_K_T
-      !E_NAME type STRING
     raising
       ZCX_ABAK .
   methods FILL_DEFAULTS
@@ -163,7 +156,7 @@ METHOD fill_defaults.
                  <s_kv> LIKE LINE OF <s_k>-t_kv.
 
   LOOP AT ct_k ASSIGNING <s_k>.
-    LOOP AT <s_k>-t_kv ASSIGNING <s_kv>.
+    LOOP AT <s_k>-t_kv ASSIGNING <s_kv> WHERE sign IS INITIAL OR option IS INITIAL. "#EC CI_NESTED
       IF <s_kv>-sign IS INITIAL.
         <s_kv>-sign = gc_sign-include.
       ENDIF.
@@ -178,14 +171,11 @@ ENDMETHOD.
 
   METHOD load_data.
 
-    CLEAR: et_k, e_name.
-
     IF g_loaded = abap_true.
       RETURN.
     ENDIF.
 
-    load_data_aux( IMPORTING et_k   = gt_k
-                             e_name = g_name ).
+    gt_k = load_data_aux( ).
 
     fill_defaults( CHANGING ct_k = gt_k ).
 
@@ -202,15 +192,8 @@ ENDMETHOD.
   ENDMETHOD.
 
 
-  METHOD zif_abak_data~get_name.
-    load_data( ).
-    r_name = g_name.
-  ENDMETHOD.
-
-
   METHOD zif_abak_data~invalidate.
     CLEAR gt_k[].
-    CLEAR g_name.
     CLEAR g_loaded.
     invalidate_aux( ).
   ENDMETHOD.

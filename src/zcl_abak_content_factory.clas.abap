@@ -16,36 +16,27 @@ public section.
   PROTECTED SECTION.
 private section.
 
-  types:
-    BEGIN OF ty_s_param,
-      name TYPE string,
-      value TYPE string,
-    END OF ty_s_param .
-  types:
-    ty_t_param TYPE SORTED TABLE OF ty_s_param WITH UNIQUE KEY name .
-
-  constants:
-    begin of gc_regex,
-      so10_param TYPE string VALUE '^([a-z]\w*)(?: ([a-z]\w*)(?: ([a-z]*))*)*$', "#EC NOTEXT
-      rfc_params type string value '^([a-z]\w*)(?: ([a-z]\w*))*$', "#EC NOTEXT
-    end of gc_regex .
   constants GC_SO10_ID_DEFAULT type TDID value 'ST'. "#EC NOTEXT
 
-  class-methods GET_SO10_PARAMS
+  class-methods GET_INSTANCE_SO10
     importing
-      !I_PARAM type STRING
-    exporting
-      !E_NAME type TDOBNAME
-      !E_ID type TDID
-      !E_SPRAS type SPRAS
+      !I_CONTENT type STRING
+    returning
+      value(RO_CONTENT) type ref to ZIF_ABAK_CONTENT
     raising
       ZCX_ABAK .
-  class-methods GET_RFC_PARAMS
+  class-methods GET_INSTANCE_SET
     importing
-      !I_PARAM type STRING
-    exporting
-      !E_ID type ZABAK_ID
-      !E_RFCDEST type RFCDEST
+      !I_CONTENT type STRING
+    returning
+      value(RO_CONTENT) type ref to ZIF_ABAK_CONTENT
+    raising
+      ZCX_ABAK .
+  class-methods GET_INSTANCE_RFC
+    importing
+      !I_CONTENT type STRING
+    returning
+      value(RO_CONTENT) type ref to ZIF_ABAK_CONTENT
     raising
       ZCX_ABAK .
 ENDCLASS.
@@ -55,197 +46,127 @@ ENDCLASS.
 CLASS ZCL_ABAK_CONTENT_FACTORY IMPLEMENTATION.
 
 
-  METHOD get_instance.
-    DATA: so10_name   TYPE tdobname,
-          so10_id     TYPE tdid,
-          so10_spras  TYPE spras,
-          rfc_id      TYPE zabak_id,
-          rfc_rfcdest TYPE rfcdest.
-
-    CASE i_content_type.
-      WHEN zif_abak_consts=>content_type-inline.
-        CREATE OBJECT ro_content TYPE zcl_abak_content_inline
-          EXPORTING
-            i_content = i_content.
-
-      WHEN zif_abak_consts=>content_type-url.
-        CREATE OBJECT ro_content TYPE zcl_abak_content_url
-          EXPORTING
-            i_url = i_content.
-
-      WHEN zif_abak_consts=>content_type-file.
-        CREATE OBJECT ro_content TYPE zcl_abak_content_file
-          EXPORTING
-            i_filepath = i_content.
-
-      WHEN zif_abak_consts=>content_type-standard_text.
-        get_so10_params( EXPORTING
-                           i_param = i_content
-                         IMPORTING
-                           e_name  = so10_name
-                           e_id    = so10_id
-                           e_spras = so10_spras ).
-        CREATE OBJECT ro_content TYPE zcl_abak_content_so10
-          EXPORTING
-            i_id    = so10_id
-            i_name  = so10_name
-            i_spras = so10_spras.
-
-      WHEN zif_abak_consts=>content_type-rfc.
-        get_rfc_params( EXPORTING
-                          i_param = i_content
-                        IMPORTING
-                          e_id      = rfc_id
-                          e_rfcdest = rfc_rfcdest ).
-        CREATE OBJECT ro_content TYPE zcl_abak_content_rfc
-          EXPORTING
-            i_id      = rfc_id
-            i_rfcdest = rfc_rfcdest.
-
-      WHEN OTHERS.
-        RAISE EXCEPTION TYPE zcx_abak
-          EXPORTING
-            textid = zcx_abak=>invalid_parameters.
-    ENDCASE.
-
-  ENDMETHOD.
-
-
-METHOD get_rfc_params.
-
-  DATA: o_regex   TYPE REF TO cl_abap_regex,
-        o_exp     TYPE REF TO cx_root,
-        o_matcher TYPE REF TO cl_abap_matcher,
-        t_result  TYPE match_result_tab,
-        str       TYPE string.
-
-  FIELD-SYMBOLS: <s_result> LIKE LINE OF t_result.
-
-  CLEAR: e_id, e_rfcdest.
-
-  TRY.
-      CREATE OBJECT o_regex
+METHOD get_instance.
+  CASE i_content_type.
+    WHEN zif_abak_consts=>content_type-inline.
+      CREATE OBJECT ro_content TYPE zcl_abak_content_inline
         EXPORTING
-          pattern     = gc_regex-rfc_params
-          ignore_case = abap_true.
+          i_content = i_content.
 
-      o_matcher = o_regex->create_matcher( text = i_param ).
+    WHEN zif_abak_consts=>content_type-url.
+      CREATE OBJECT ro_content TYPE zcl_abak_content_url
+        EXPORTING
+          i_url = i_content.
 
-      t_result = o_matcher->find_all( ).
+    WHEN zif_abak_consts=>content_type-file.
+      CREATE OBJECT ro_content TYPE zcl_abak_content_file
+        EXPORTING
+          i_filepath = i_content.
 
-*     ID name
-      READ TABLE t_result ASSIGNING <s_result> INDEX 1.
-      IF sy-subrc = 0.
-        str = i_param+<s_result>-offset(<s_result>-length).
-        IF strlen( str ) > 30.
-          RAISE EXCEPTION TYPE zcx_abak
-            EXPORTING
-              textid = zcx_abak=>invalid_parameters.
-        ELSE.
-          e_id = str.
-        ENDIF.
-      ELSE.
-        RAISE EXCEPTION TYPE zcx_abak. "TODO
-      ENDIF.
+    WHEN zif_abak_consts=>content_type-database.
+      CREATE OBJECT ro_content TYPE zcl_abak_content_database
+        EXPORTING
+          i_tablename = i_content.
 
-*     RFC Destination
-      READ TABLE t_result ASSIGNING <s_result> INDEX 2.
-      IF sy-subrc = 0.
-        str = i_param+<s_result>-offset(<s_result>-length).
-        IF strlen( str ) > 32.
-          RAISE EXCEPTION TYPE zcx_abak
-            EXPORTING
-              textid = zcx_abak=>invalid_parameters.
-        ELSE.
-          e_rfcdest = str.
-        ENDIF.
-      ENDIF.
+    WHEN zif_abak_consts=>content_type-set.
+      ro_content = get_instance_set( i_content ).
 
-    CATCH cx_sy_regex cx_sy_matcher INTO o_exp.
+    WHEN zif_abak_consts=>content_type-standard_text.
+      ro_content = get_instance_so10( i_content ).
+
+    WHEN zif_abak_consts=>content_type-rfc.
+      ro_content = get_instance_rfc( i_content ).
+
+    WHEN OTHERS.
       RAISE EXCEPTION TYPE zcx_abak
         EXPORTING
-          previous = o_exp.
-  ENDTRY.
+          textid = zcx_abak=>invalid_parameters.
+  ENDCASE.
+ENDMETHOD.
+
+
+METHOD get_instance_rfc.
+  DATA: o_params TYPE REF TO zif_abak_params,
+        rfcdest  TYPE rfcdest,
+        id       TYPE zabak_id.
+
+  o_params = zcl_abak_params=>create_instance( i_params    = i_content
+                                               i_paramsdef = '+RFCDEST(32) +ID' ).
+
+  id = o_params->get( 'ID' ).
+  rfcdest = o_params->get( 'RFCDEST' ).
+
+  CREATE OBJECT ro_content TYPE zcl_abak_content_rfc
+    EXPORTING
+      i_id      = id
+      i_rfcdest = rfcdest.
 
 ENDMETHOD.
 
 
-METHOD get_so10_params.
+METHOD get_instance_set.
+  DATA: o_params TYPE REF TO zif_abak_params,
+        context  TYPE zabak_context,
+        scope    TYPE zabak_scope,
+        setid    TYPE setid,
+        setclass TYPE setclass.
 
-  DATA: o_regex   TYPE REF TO cl_abap_regex,
-        o_exp     TYPE REF TO cx_root,
-        o_matcher TYPE REF TO cl_abap_matcher,
-        t_result  TYPE match_result_tab,
-        str       TYPE string.
+  o_params = zcl_abak_params=>create_instance( i_params    = i_content
+                                               i_paramsdef = '+ID(34) +CLASS(4) SCOPE(40) CONTEXT(40)' ).
 
-  FIELD-SYMBOLS: <s_result> LIKE LINE OF t_result.
+  scope = o_params->get( 'SCOPE' ).
+  context = o_params->get( 'CONTEXT' ).
+  setid = o_params->get( 'ID' ).
+  setclass = o_params->get( 'CLASS' ).
 
-  TRY.
-      CREATE OBJECT o_regex
-        EXPORTING
-          pattern     = gc_regex-so10_param
-          ignore_case = abap_true.
+  CREATE OBJECT ro_content TYPE zcl_abak_content_set
+    EXPORTING
+      i_context  = context
+      i_scope    = scope
+      i_setclass = setclass
+      i_setid    = setid.
 
-      o_matcher = o_regex->create_matcher( text = i_param ).
+ENDMETHOD.
 
-      t_result = o_matcher->find_all( ).
 
-*     Text name
-      READ TABLE t_result ASSIGNING <s_result> INDEX 1.
-      IF sy-subrc = 0.
-        str = i_param+<s_result>-offset(<s_result>-length).
-        IF strlen( str ) > 70.
-          RAISE EXCEPTION TYPE zcx_abak
-            EXPORTING
-              textid = zcx_abak=>invalid_parameters.
-        ELSE.
-          e_name = str.
-        ENDIF.
-      ELSE.
-        RAISE EXCEPTION TYPE zcx_abak. "TODO
-      ENDIF.
+METHOD get_instance_so10.
+  DATA: o_params TYPE REF TO zif_abak_params,
+        name     TYPE tdobname,
+        id       TYPE tdid,
+        language TYPE char2,
+        spras    TYPE spras.
 
-*     Text id
-      READ TABLE t_result ASSIGNING <s_result> INDEX 2.
-      IF sy-subrc = 0.
-        str = i_param+<s_result>-offset(<s_result>-length).
-        IF strlen( str ) > 4.
-          RAISE EXCEPTION TYPE zcx_abak
-            EXPORTING
-              textid = zcx_abak=>invalid_parameters.
-        ELSE.
-          e_id = str.
-        ENDIF.
-      ELSE.
-        e_id = gc_so10_id_default.
-      ENDIF.
+  o_params = zcl_abak_params=>create_instance( i_params    = i_content
+                                               i_paramsdef = '+NAME(70) ID(4) LANGUAGE(2)' ).
 
-*     Language
-      READ TABLE t_result ASSIGNING <s_result> INDEX 3.
-      IF sy-subrc = 0.
-        str = i_param+<s_result>-offset(<s_result>-length).
-        CALL FUNCTION 'CONVERSION_EXIT_ISOLA_INPUT'
-          EXPORTING
-            input            = str
-          IMPORTING
-            output           = e_spras
-          EXCEPTIONS
-            unknown_language = 1
-            OTHERS           = 2.
-        IF sy-subrc <> 0.
-          RAISE EXCEPTION TYPE zcx_abak
-            EXPORTING
-              previous_from_syst = abap_true.
-        ENDIF.
-      ELSE.
-        e_spras = sy-langu.
-      ENDIF.
+  name = o_params->get( 'NAME' ).
 
-    CATCH cx_sy_regex cx_sy_matcher INTO o_exp.
-      RAISE EXCEPTION TYPE zcx_abak
-        EXPORTING
-          previous = o_exp.
-  ENDTRY.
+  id = o_params->get( 'ID' ).
+  IF id IS INITIAL.
+    id = gc_so10_id_default.
+  ENDIF.
+
+  language = o_params->get( 'LANGUAGE' ).
+
+  CALL FUNCTION 'CONVERSION_EXIT_ISOLA_INPUT'
+    EXPORTING
+      input            = language
+    IMPORTING
+      output           = spras
+    EXCEPTIONS
+      unknown_language = 1
+      OTHERS           = 2.
+  IF sy-subrc <> 0.
+    RAISE EXCEPTION TYPE zcx_abak
+      EXPORTING
+        previous_from_syst = abap_true.
+  ENDIF.
+
+  CREATE OBJECT ro_content TYPE zcl_abak_content_so10
+    EXPORTING
+      i_id    = id
+      i_name  = name
+      i_spras = spras.
 
 ENDMETHOD.
 ENDCLASS.

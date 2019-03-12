@@ -25,9 +25,6 @@ CLASS ZCL_ABAK_FORMAT_FACTORY IMPLEMENTATION.
 
     CASE i_format_type.
 
-      WHEN zif_abak_consts=>format_type-database.
-        CREATE OBJECT ro_instance TYPE zcl_abak_format_db.
-
       WHEN zif_abak_consts=>format_type-xml.
         CREATE OBJECT ro_instance TYPE zcl_abak_format_xml.
 
@@ -36,6 +33,9 @@ CLASS ZCL_ABAK_FORMAT_FACTORY IMPLEMENTATION.
 
       WHEN zif_abak_consts=>format_type-csv.
         CREATE OBJECT ro_instance TYPE zcl_abak_format_csv.
+
+      WHEN zif_abak_consts=>format_type-internal.
+        CREATE OBJECT ro_instance TYPE zcl_abak_format_internal.
 
       WHEN OTHERS.
         RAISE EXCEPTION TYPE zcx_abak

@@ -1,0 +1,9 @@
+<?sap.transform simple?>
+<tt:transform xmlns:tt="http://www.sap.com/transformation-templates">
+  <tt:root name="ROOT"/>
+  <tt:template>
+    <node>
+      <tt:copy ref="ROOT"/>
+    </node>
+  </tt:template>
+</tt:transform>

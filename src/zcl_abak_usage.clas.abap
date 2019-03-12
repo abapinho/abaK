@@ -24,9 +24,6 @@ public section.
 protected section.
 private section.
 
-  constants GC_DEMO_TABLENAME type STRING value 'ZABAK_DEMO'. "#EC NOTEXT
-  constants GC_DEMO_ID type ZABAK_ID value 'ABAK_DEMO'. "#EC NOTEXT
-
   methods GET_OWN_PACKAGE
     returning
       value(R_DEVCLASS) type DEVCLASS .
@@ -74,7 +71,7 @@ METHOD GET_SUBCLASSES.
         t_subclass = o_class->get_subclasses( ).
         INSERT <s_class> INTO TABLE t_subclass.
 
-        LOOP AT t_subclass ASSIGNING <s_subclass>.
+        LOOP AT t_subclass ASSIGNING <s_subclass>. "#EC CI_NESTED
           CREATE OBJECT o_class
             EXPORTING
               clsname = <s_subclass>-clsname.
@@ -96,8 +93,6 @@ METHOD get_where_used.
   DATA: t_findstring TYPE STANDARD TABLE OF string,
         t_found       TYPE STANDARD TABLE OF rsfindlst ,
         my_devclass   TYPE devclass,
-        name          TYPE sobj_name,
-        devclass      TYPE devclass,
         s_tadir       LIKE LINE OF rt_tadir.
 
   FIELD-SYMBOLS: <s_found> LIKE LINE OF t_found.
@@ -146,7 +141,7 @@ METHOD get_where_used.
     WHERE pgmid = 'R3TR'
       AND ( object = 'CLAS' OR object = 'PROG' )
       AND obj_name = rt_tadir-obj_name
-      AND devclass <> my_devclass.
+      AND devclass <> my_devclass.        "#EC CI_GENBUFF
 
 ENDMETHOD.
 

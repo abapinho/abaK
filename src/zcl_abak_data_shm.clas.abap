@@ -21,35 +21,33 @@ public section.
       REDEFINITION .
     METHODS load_data_aux
       REDEFINITION .
-  PRIVATE SECTION.
+private section.
 
-    CONSTANTS gc_max_instance_name TYPE i VALUE 80.         "#EC NOTEXT
-    DATA g_format_type TYPE zabak_format_type .
-    DATA g_content_type TYPE zabak_content_type .
-    DATA g_content TYPE string .
+  constants GC_MAX_INSTANCE_NAME type I value 80. "#EC NOTEXT
+  data G_FORMAT_TYPE type ZABAK_FORMAT_TYPE .
+  data G_CONTENT_TYPE type ZABAK_CONTENT_TYPE .
+  data G_CONTENT type STRING .
 
-    METHODS read_shm
-      EXPORTING
-        value(et_k) TYPE zabak_k_t
-        !e_name TYPE string
-      RAISING
-        zcx_abak
-        cx_shm_no_active_version
-        cx_shm_inconsistent .
-    METHODS write_shm
-      EXPORTING
-        value(et_k) TYPE zabak_k_t
-        !e_name TYPE string
-      RAISING
-        zcx_abak .
-    METHODS get_instance_name
-      RETURNING
-        value(r_instance_name) TYPE shm_inst_name .
-    METHODS hash
-      IMPORTING
-        !i_data TYPE string
-      RETURNING
-        value(r_hashed) TYPE string .
+  methods READ_SHM
+    returning
+      value(RT_K) type ZABAK_K_T
+    raising
+      ZCX_ABAK
+      CX_SHM_NO_ACTIVE_VERSION
+      CX_SHM_INCONSISTENT .
+  methods WRITE_SHM
+    returning
+      value(RT_K) type ZABAK_K_T
+    raising
+      ZCX_ABAK .
+  methods GET_INSTANCE_NAME
+    returning
+      value(R_INSTANCE_NAME) type SHM_INST_NAME .
+  methods HASH
+    importing
+      !I_DATA type STRING
+    returning
+      value(R_HASHED) type STRING .
 ENDCLASS.
 
 
@@ -141,18 +139,15 @@ CLASS ZCL_ABAK_DATA_SHM IMPLEMENTATION.
     DATA: o_exp TYPE REF TO cx_shm_parameter_error.
 
     TRY.
-        read_shm( IMPORTING et_k   = et_k
-                            e_name = e_name ).
+        rt_k = read_shm( ).
 
       CATCH cx_shm_no_active_version.
-        write_shm( IMPORTING et_k   = et_k
-                             e_name = e_name ).
+        rt_k = write_shm( ).
 
       CATCH cx_shm_inconsistent.
         TRY.
             zcl_abak_shm_area=>free_instance( get_instance_name( ) ).
-            write_shm( IMPORTING et_k   = et_k
-                                 e_name = e_name ).
+            rt_k = write_shm( ).
 
           CATCH cx_shm_parameter_error INTO o_exp.
             LOG-POINT ID zabak SUBKEY 'data_shm.load_data_aux' FIELDS get_instance_name( ) o_exp->get_text( ).
@@ -172,8 +167,7 @@ CLASS ZCL_ABAK_DATA_SHM IMPLEMENTATION.
 
     TRY.
         o_broker = zcl_abak_shm_area=>attach_for_read( get_instance_name( ) ).
-        et_k = o_broker->root->get_data( ).
-        e_name = o_broker->root->get_name( ).
+        rt_k = o_broker->root->get_data( ).
         o_broker->detach( ).
 
       CATCH cx_shm_exclusive_lock_active
@@ -209,8 +203,7 @@ CLASS ZCL_ABAK_DATA_SHM IMPLEMENTATION.
                 i_content      = g_content.
 
             o_broker->set_root( o_root ).
-            et_k = o_root->get_data( ).
-            e_name = o_root->get_name( ).
+            rt_k = o_root->get_data( ).
 
             o_broker->detach_commit( ).
 

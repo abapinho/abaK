@@ -1,20 +1,16 @@
 class ZCL_ABAK_FORMAT_CSV definition
   public
-  inheriting from ZCL_ABAK_FORMAT
   final
   create public .
 
 public section.
 
+  interfaces ZIF_ABAK_FORMAT .
+
   methods CONSTRUCTOR
     importing
       !I_DELIMITER type CHAR1 default '"'
       !I_SEPARATOR type CHAR1 default ',' .
-
-  methods ZIF_ABAK_FORMAT~CONVERT
-    redefinition .
-  methods ZIF_ABAK_FORMAT~GET_TYPE
-    redefinition .
 protected section.
 private section.
 
@@ -70,36 +66,19 @@ METHOD split_into_lines.
 ENDMETHOD.
 
 
-  METHOD zif_abak_format~convert.
+METHOD zif_abak_format~convert.
 
-    DATA: t_db TYPE zabak_db_t.
-    FIELD-SYMBOLS: <s_db> LIKE LINE OF t_db.
+  DATA: t_db TYPE zabak_db_t,
+        o_k_table TYPE REF TO zcl_abak_k_table.
 
-    LOG-POINT ID zabak SUBKEY 'format_csv.convert' FIELDS i_data.
+  LOG-POINT ID zabak SUBKEY 'format_csv.convert' FIELDS i_data.
 
-    IF et_k IS SUPPLIED.
-      t_db = convert_csv_2_db( split_into_lines( i_data ) ).
+  t_db = convert_csv_2_db( split_into_lines( i_data ) ).
+  CREATE OBJECT o_k_table.
+  o_k_table->add_db_t( t_db ).
+  rt_k = o_k_table->get_k_t( ).
 
-      LOOP AT t_db ASSIGNING <s_db>.
-        add_kv(
-          EXPORTING
-            i_scope     = <s_db>-scope
-            i_fieldname = <s_db>-fieldname
-            i_context   = <s_db>-context
-            i_sign      = <s_db>-ue_sign
-            i_option    = <s_db>-ue_option
-            i_low       = <s_db>-ue_low
-            i_high      = <s_db>-ue_high
-          CHANGING
-            ct_k        = et_k ).
-      ENDLOOP.
-    ENDIF.
-
-    IF e_name IS SUPPLIED.
-      e_name = 'CSV'.
-    ENDIF.
-
-  ENDMETHOD.
+ENDMETHOD.
 
 
   METHOD ZIF_ABAK_FORMAT~GET_TYPE.

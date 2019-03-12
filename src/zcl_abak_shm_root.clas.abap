@@ -18,11 +18,6 @@ public section.
       value(RT_K) type ZABAK_K_T
     raising
       ZCX_ABAK .
-  methods GET_NAME
-    returning
-      value(R_NAME) type STRING
-    raising
-      ZCX_ABAK .
   PROTECTED SECTION.
 PRIVATE SECTION.
 
@@ -30,7 +25,6 @@ PRIVATE SECTION.
   DATA g_content_type TYPE zabak_content_type .
   DATA g_content TYPE string .
   DATA gt_k TYPE zabak_k_t .
-  DATA g_name TYPE string .
   DATA g_loaded TYPE flag .
 
   METHODS load_data
@@ -65,12 +59,6 @@ CLASS ZCL_ABAK_SHM_ROOT IMPLEMENTATION.
   ENDMETHOD.                                             "#EC CI_VALPAR
 
 
-  METHOD get_name.
-    load_data( ).
-    r_name = g_name.
-  ENDMETHOD.
-
-
   METHOD load_data.
     DATA o_data TYPE REF TO zif_abak_data.
     IF g_loaded IS INITIAL.
@@ -79,7 +67,6 @@ CLASS ZCL_ABAK_SHM_ROOT IMPLEMENTATION.
                                                              i_content      = g_content ).
 
       gt_k = o_data->get_data( ).
-      g_name = o_data->get_name( ).
       g_loaded = abap_true.
     ENDIF.
 

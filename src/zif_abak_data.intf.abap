@@ -1,27 +1,22 @@
-INTERFACE zif_abak_data
-  PUBLIC .
+interface ZIF_ABAK_DATA
+  public .
 
 
-  METHODS read
-    IMPORTING
-      !i_scope TYPE zabak_scope
-      !i_fieldname TYPE name_feld
-      !i_context TYPE zabak_context
-    RETURNING
-      value(rt_kv) TYPE zabak_kv_t
-    RAISING
-      zcx_abak .
-  METHODS invalidate
-    RAISING
-      zcx_abak .
-  METHODS get_name
-    RETURNING
-      value(r_name) TYPE string
-    RAISING
-      zcx_abak .
-  METHODS get_data
-    RETURNING
-      value(rt_k) TYPE zabak_k_t
-    RAISING
-      zcx_abak .
-ENDINTERFACE.
+  methods READ
+    importing
+      !I_SCOPE type ZABAK_SCOPE
+      !I_FIELDNAME type NAME_FELD
+      !I_CONTEXT type ZABAK_CONTEXT
+    returning
+      value(RT_KV) type ZABAK_KV_T
+    raising
+      ZCX_ABAK .
+  methods INVALIDATE
+    raising
+      ZCX_ABAK .
+  methods GET_DATA
+    returning
+      value(RT_K) type ZABAK_K_T
+    raising
+      ZCX_ABAK .
+endinterface.

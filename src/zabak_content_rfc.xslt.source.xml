@@ -1,10 +1,8 @@
 <?sap.transform simple?>
 <tt:transform xmlns:tt="http://www.sap.com/transformation-templates" xmlns:ddic="http://www.sap.com/abapxml/types/dictionary" xmlns:def="http://www.sap.com/abapxml/types/defined">
-  <tt:root name="NAME" />
   <tt:root name="CONSTANTS" type="ddic:ZABAK_XML_K_T"/>
   <tt:template>
     <abak>
-      <tt:attribute name="name" value-ref=".NAME"/>
       <tt:loop ref=".CONSTANTS">
         <k>
           <tt:attribute name="scope" value-ref="SCOPE" ref="SCOPE"/>

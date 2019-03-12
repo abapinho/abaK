@@ -12,7 +12,6 @@ CLASS lcl_unittest DEFINITION FOR TESTING
 
     METHODS: setup RAISING zcx_abak.
     METHODS: read_valid FOR TESTING RAISING zcx_abak.
-    METHODS: get_name FOR TESTING RAISING zcx_abak.
 ENDCLASS.       "lcl_Unittest
 
 
@@ -23,8 +22,8 @@ CLASS lcl_unittest IMPLEMENTATION.
 
     CREATE OBJECT f_cut
       EXPORTING
-        io_format = zcl_abak_format_factory=>get_instance( zif_abak_consts=>format_type-database )
-        io_content = zcl_abak_content_factory=>get_instance( i_content_type = zif_abak_consts=>content_type-inline
+        io_format = zcl_abak_format_factory=>get_instance( zif_abak_consts=>format_type-internal )
+        io_content = zcl_abak_content_factory=>get_instance( i_content_type = zif_abak_consts=>content_type-database
                                                              i_content      = gc_tablename-valid ).
   ENDMETHOD.
 
@@ -36,15 +35,6 @@ CLASS lcl_unittest IMPLEMENTATION.
                                               i_fieldname = 'BUKRS'
                                               i_context   = space ) )
       msg = 'Resulting table should not be empty' ).
-
-  ENDMETHOD.
-
-  METHOD get_name.
-
-    cl_abap_unit_assert=>assert_equals(
-      exp = gc_tablename-valid
-      act = f_cut->zif_abak_data~get_name( )
-      msg = 'Name different from what was expected' ).
 
   ENDMETHOD.
 

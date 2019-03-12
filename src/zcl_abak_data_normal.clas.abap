@@ -52,12 +52,7 @@ CLASS ZCL_ABAK_DATA_NORMAL IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD load_data_aux.
-    go_format->convert(
-      EXPORTING
-        i_data = go_content->get( )
-      IMPORTING
-        et_k   = et_k
-        e_name = e_name ).
-  ENDMETHOD.
+METHOD load_data_aux.
+  rt_k = go_format->convert( go_content->get( ) ).
+ENDMETHOD.
 ENDCLASS.

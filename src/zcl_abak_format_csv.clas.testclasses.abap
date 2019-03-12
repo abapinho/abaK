@@ -21,11 +21,8 @@ CLASS lcl_unittest IMPLEMENTATION.
 
     CREATE OBJECT f_cut.
 
-    f_cut->zif_abak_format~convert(
-      EXPORTING
-        i_data = |GLOBAL, BUKRS, , , I, EQ, 1234{ cl_abap_char_utilities=>cr_lf }GLOBAL, WAERS, , 1, I, EQ, EUR{ cl_abap_char_utilities=>cr_lf }GLOBAL, WAERS, , 2, I, EQ, USD|
-      IMPORTING
-        et_k   = t_k ).
+    t_k = f_cut->zif_abak_format~convert(
+        i_data = |GLOBAL, BUKRS, , , I, EQ, 1234{ cl_abap_char_utilities=>cr_lf }GLOBAL, WAERS, , 1, I, EQ, EUR{ cl_abap_char_utilities=>cr_lf }GLOBAL, WAERS, , 2, I, EQ, USD| ).
 
     cl_abap_unit_assert=>assert_equals( exp = 2
                                         act = lines( t_k ) ).

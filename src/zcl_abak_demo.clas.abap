@@ -29,7 +29,6 @@ protected section.
 private section.
 
   constants GC_DEMO_TABLENAME type STRING value 'ZABAK_DEMO'. "#EC NOTEXT
-  constants GC_DEMO_ID type ZABAK_ID value 'ABAK_DEMO'. "#EC NOTEXT
   data GO_ABAK type ref to ZIF_ABAK .
 
   methods CREATE_INSTANCE
@@ -72,19 +71,26 @@ method CONSTRUCTOR.
 endmethod.
 
 
-method CREATE_INSTANCE.
+METHOD create_instance.
 
   CASE i_which_demo.
+
     WHEN 'DB'.
       generate_db_data( ).
       go_abak = get_instance_standard_db( ).
+
     WHEN 'ZABAK'.
       go_abak = get_instance_zabak_db( ).
+
     WHEN 'XML'.
       go_abak = get_instance_standard_xml( ).
+
+    WHEN OTHERS.
+      RAISE EXCEPTION TYPE zcx_abak. " TODO
+
   ENDCASE.
 
-endmethod.
+ENDMETHOD.
 
 
 METHOD generate_db_data.
@@ -103,13 +109,12 @@ METHOD generate_db_data.
                  <s_kv> LIKE LINE OF <s_k>-t_kv.
 
   CREATE OBJECT o_format_xml.
-  o_format_xml->zif_abak_format~convert( EXPORTING i_data = get_demo_xml( )
-                                         IMPORTING et_k   = t_k ).
+  t_k = o_format_xml->zif_abak_format~convert( get_demo_xml( ) ).
 
   LOOP AT t_k ASSIGNING <s_k>.
     MOVE-CORRESPONDING <s_k> TO s_data.
     CLEAR s_data-idx.
-    LOOP AT <s_k>-t_kv ASSIGNING <s_kv>.
+    LOOP AT <s_k>-t_kv ASSIGNING <s_kv>. "#EC CI_NESTED
       ADD 1 TO s_data-idx.
       s_data-ue_sign = <s_kv>-sign.
       s_data-ue_option = <s_kv>-option.
@@ -120,7 +125,7 @@ METHOD generate_db_data.
   ENDLOOP.
 
 * Delete table content
-  DELETE FROM zabak_demo WHERE scope <> '1MP0SS1BL3SC0P3'. "#EC CI_NOFIELD
+  DELETE FROM zabak_demo WHERE scope <> '1MPR0BABL3SC0P3'. "#EC CI_NOFIELD
 
   INSERT zabak_demo FROM TABLE t_data.
 
@@ -131,7 +136,7 @@ METHOD get_customer_for_context.
   DATA: kunnr TYPE kunnr,
         context TYPE string.
 
-  WRITE / 'Demo: get customer for scenario'.
+  WRITE / 'Demo: get customer for scenario'. ##NO_TEXT
 
   FORMAT INTENSIFIED OFF.
 
@@ -147,7 +152,7 @@ METHOD get_customer_for_context.
                                 i_fieldname = 'KUNNR'
                                 i_context   = context ).
 
-    WRITE: / 'The customer for context', context, 'is', kunnr.
+    WRITE: / 'The customer for context', context, 'is', kunnr. ##NO_TEXT
 
   ENDDO.
 
@@ -176,8 +181,9 @@ ENDMETHOD.
 
 
 METHOD GET_INSTANCE_STANDARD_DB.
-  ro_abak = zcl_abak_factory=>get_standard_instance( i_format_type  = zif_abak_consts=>format_type-database
-                                                      i_content      = gc_demo_tablename ).
+  ro_abak = zcl_abak_factory=>get_standard_instance( i_format_type  = zif_abak_consts=>format_type-internal
+                                                     i_content_type = zif_abak_consts=>content_type-database
+                                                     i_content      = gc_demo_tablename ).
 ENDMETHOD.
 
 
@@ -188,6 +194,7 @@ METHOD get_instance_standard_xml.
 
   ro_abak = zcl_abak_factory=>get_standard_instance(
     i_format_type  = zif_abak_consts=>format_type-xml
+    i_content_type = zif_abak_consts=>content_type-inline
     i_content      = xml ).
 ENDMETHOD.
 
@@ -213,7 +220,7 @@ ENDMETHOD.
 METHOD is_account_type_valid.
   DATA: koart TYPE koart.
 
-  WRITE / 'Demo: is account type valid for PROJ1 scope?'.
+  WRITE / 'Demo: is account type valid for PROJ1 scope?'. ##NO_TEXT
 
   FORMAT INTENSIFIED OFF.
 
@@ -229,9 +236,9 @@ METHOD is_account_type_valid.
     IF go_abak->check_value( i_scope     = 'PROJ1'
                              i_fieldname = 'KOART'
                              i_value     = koart ) = abap_true.
-      WRITE: / koart, 'Is a valid account ype'.
+      WRITE: / koart, 'Is a valid account type'. ##NO_TEXT
     ELSE.
-      WRITE: / koart, 'Is NOT a valid account ype'.
+      WRITE: / koart, 'Is NOT a valid account type'. ##NO_TEXT
     ENDIF.
 
   ENDDO.
@@ -245,7 +252,7 @@ METHOD IS_CURRENCY_VALID.
 
   DATA: waers   TYPE waers.
 
-  WRITE / 'Demo: check if currency is valid for context PT'.
+  WRITE / 'Demo: check if currency is valid for context PT'. ##NO_TEXT
 
   FORMAT INTENSIFIED OFF.
 
@@ -260,9 +267,9 @@ METHOD IS_CURRENCY_VALID.
     IF waers IN go_abak->get_range( i_scope = sy-cprog
                                     i_fieldname = 'WAERS'
                                     i_context   = 'PT' ).
-      WRITE: / 'Currency', waers, 'is valid for PT'.
+      WRITE: / 'Currency', waers, 'is valid for PT'. ##NO_TEXT
     ELSE.
-      WRITE: / 'Currency', waers, 'is NOT valid for PT'.
+      WRITE: / 'Currency', waers, 'is NOT valid for PT'. ##NO_TEXT
     ENDIF.
 
   ENDDO.
@@ -276,7 +283,7 @@ METHOD validate_amount.
 
   DATA: wrbtr TYPE wrbtr.
 
-  WRITE / 'Demo: validate amount'.
+  WRITE / 'Demo: validate amount'. ##NO_TEXT
 
   FORMAT INTENSIFIED OFF.
 
@@ -297,9 +304,9 @@ METHOD validate_amount.
     IF go_abak->check_value( i_scope = sy-cprog
                              i_fieldname = 'WRBTR'
                              i_value = wrbtr ) = abap_true.
-      WRITE: / 'Value', wrbtr, 'OK'.
+      WRITE: / 'Value', wrbtr CURRENCY 'EUR', 'OK'. ##NO_TEXT
     ELSE.
-      WRITE: / 'Value', wrbtr, 'Not OK'.
+      WRITE: / 'Value', wrbtr CURRENCY 'EUR', 'Not OK'. ##NO_TEXT
     ENDIF.
 
   ENDDO.

@@ -1,7 +1,7 @@
 *"* use this source file for the definition and implementation of
 *"* local helper classes, interface definitions and type
 *"* declarations
-CLASS lcl_cache DEFINITION.
+CLASS lcl_cache DEFINITION FINAL.
   PUBLIC SECTION.
 
     CLASS-METHODS get

@@ -30,22 +30,22 @@
      <DOMNAME>ZABAK_FORMAT_TYPE</DOMNAME>
      <VALPOS>0003</VALPOS>
      <DDLANGUAGE>E</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
-    </DD07V>
-    <DD07V>
-     <DOMNAME>ZABAK_FORMAT_TYPE</DOMNAME>
-     <VALPOS>0004</VALPOS>
-     <DDLANGUAGE>E</DDLANGUAGE>
      <DOMVALUE_L>JSON</DOMVALUE_L>
      <DDTEXT>JSON</DDTEXT>
     </DD07V>
     <DD07V>
      <DOMNAME>ZABAK_FORMAT_TYPE</DOMNAME>
-     <VALPOS>0005</VALPOS>
+     <VALPOS>0004</VALPOS>
      <DDLANGUAGE>E</DDLANGUAGE>
      <DOMVALUE_L>XML</DOMVALUE_L>
      <DDTEXT>XML</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZABAK_FORMAT_TYPE</DOMNAME>
+     <VALPOS>0005</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
+     <DDTEXT>Internal</DDTEXT>
     </DD07V>
    </DD07V_TAB>
    <I18N_LANGS>
@@ -276,241 +276,207 @@
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>1</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>2</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>3</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>A</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>F</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>G</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>I</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>J</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>L</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>M</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>N</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>P</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>R</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>S</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>T</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>U</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
+     <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0003</VALPOS>
-     <DDLANGUAGE>W</DDLANGUAGE>
-     <DOMVALUE_L>DB</DOMVALUE_L>
-     <DDTEXT>Database</DDTEXT>
-    </item>
-    <item>
-     <VALPOS>0004</VALPOS>
      <DOMVALUE_L>JSON</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0004</VALPOS>
-     <DOMVALUE_L>JSON</DOMVALUE_L>
+     <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
-     <VALPOS>0005</VALPOS>
+     <VALPOS>0004</VALPOS>
      <DOMVALUE_L>XML</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
     <item>
      <VALPOS>0005</VALPOS>
-     <DOMVALUE_L>XML</DOMVALUE_L>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
+    </item>
+    <item>
+     <VALPOS>0005</VALPOS>
+     <DOMVALUE_L>INTERNAL</DOMVALUE_L>
     </item>
    </DD07_TEXTS>
   </asx:values>

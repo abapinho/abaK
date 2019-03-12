@@ -9,7 +9,7 @@ public section.
   class-methods GET_STANDARD_INSTANCE
     importing
       !I_FORMAT_TYPE type ZABAK_FORMAT_TYPE
-      !I_CONTENT_TYPE type ZABAK_CONTENT_TYPE default ZIF_ABAK_CONSTS=>CONTENT_TYPE-INLINE
+      !I_CONTENT_TYPE type ZABAK_CONTENT_TYPE
       !I_CONTENT type STRING
       !I_BYPASS_CACHE type FLAG optional
       !I_USE_SHM type ZABAK_USE_SHM optional
@@ -135,10 +135,16 @@ ENDMETHOD.
 
 
 METHOD get_zabak_instance_rfc.
-*  CREATE OBJECT ro_instance TYPE zcl_abak
-*    EXPORTING
-*      io_data = zcl_abak_data_factory=>get_instance( i_id           = i_id
-*                                                     i_rfcdest      = i_rfcdest
-*                                                     i_bypass_cache = i_bypass_cache ).
+  DATA: o_data TYPE REF TO zif_abak_data.
+
+  o_data = zcl_abak_data_factory=>get_standard_instance(
+      i_format_type  = zif_abak_consts=>format_type-internal
+      i_content_type = zif_abak_consts=>content_type-rfc
+      i_content      = |{ i_rfcdest } { i_id }| ).
+
+  CREATE OBJECT ro_instance TYPE zcl_abak
+    EXPORTING
+      io_data = o_data.
+
 ENDMETHOD.
 ENDCLASS.

@@ -5,9 +5,8 @@ interface ZIF_ABAK_FORMAT
   methods CONVERT
     importing
       !I_DATA type STRING
-    exporting
-      !ET_K type ZABAK_K_T
-      !E_NAME type STRING
+    returning
+      value(RT_K) type ZABAK_K_T
     raising
       ZCX_ABAK .
   methods GET_TYPE

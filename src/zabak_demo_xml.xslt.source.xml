@@ -5,7 +5,7 @@
 <xsl:strip-space elements="*"/>
 
 <xsl:template match="/">
-  <abak name="Nice inline XML">
+  <abak>
     <k scope="GLOBAL" fieldname="BUKRS" value="4321"/>
     <k scope="PROJ1" fieldname="KOART">
       <v sign="I" option="EQ" low="D" />

@@ -162,7 +162,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
   METHOD zif_abak~check_value.
 
-    LOG-POINT ID zabak SUBKEY 'abak.check_value' FIELDS go_data->get_name( ) i_scope i_fieldname i_context i_value.
+    LOG-POINT ID zabak SUBKEY 'abak.check_value' FIELDS i_scope i_fieldname i_context i_value.
 
     r_result = check_value_aux( i_scope     = i_scope
                                 i_fieldname = i_fieldname
@@ -174,7 +174,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
   METHOD zif_abak~check_value_if_exists.
 
     TRY.
-        LOG-POINT ID zabak SUBKEY 'abak.check_value_if_exists' FIELDS go_data->get_name( ) i_scope i_fieldname i_context i_value.
+        LOG-POINT ID zabak SUBKEY 'abak.check_value_if_exists' FIELDS i_scope i_fieldname i_context i_value.
 
         r_result = check_value_aux( i_scope     = i_scope
                                     i_fieldname = i_fieldname
@@ -190,7 +190,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
   METHOD zif_abak~get_range.
 
-    LOG-POINT ID zabak SUBKEY 'abak.get_range' FIELDS go_data->get_name( ) i_scope i_fieldname i_context.
+    LOG-POINT ID zabak SUBKEY 'abak.get_range' FIELDS i_scope i_fieldname i_context. ##NO_TEXT
 
     rr_range = get_range_aux( i_scope     = i_scope
                               i_fieldname = i_fieldname
@@ -203,7 +203,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
     TRY.
 
-        LOG-POINT ID zabak SUBKEY 'abak.get_range_if_exists' FIELDS go_data->get_name( ) i_scope i_fieldname i_context.
+        LOG-POINT ID zabak SUBKEY 'abak.get_range_if_exists' FIELDS i_scope i_fieldname i_context.
 
         rr_range = get_range_aux( i_scope     = i_scope
                                   i_fieldname = i_fieldname
@@ -218,7 +218,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
   METHOD zif_abak~get_value.
 
-    LOG-POINT ID zabak SUBKEY 'abak.get_value' FIELDS go_data->get_name( ) i_scope i_fieldname i_context.
+    LOG-POINT ID zabak SUBKEY 'abak.get_value' FIELDS i_scope i_fieldname i_context.
 
     r_value = get_value_aux( i_scope     = i_scope
                              i_fieldname = i_fieldname
@@ -230,7 +230,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
   METHOD zif_abak~get_value_if_exists.
 
     TRY.
-        LOG-POINT ID zabak SUBKEY 'abak.get_value_if_exists' FIELDS go_data->get_name( ) i_scope i_fieldname i_context.
+        LOG-POINT ID zabak SUBKEY 'abak.get_value_if_exists' FIELDS i_scope i_fieldname i_context.
 
         r_value = get_value_aux( i_scope     = i_scope
                                  i_fieldname = i_fieldname
@@ -245,7 +245,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
   METHOD zif_abak~invalidate.
 
-    LOG-POINT ID zabak SUBKEY 'abak.invalidate' FIELDS go_data->get_name( ).
+    LOG-POINT ID zabak SUBKEY 'abak.invalidate'.
 
     go_data->invalidate( ).
 

@@ -1,15 +1,9 @@
 <?sap.transform simple?>
 <tt:transform xmlns:tt="http://www.sap.com/transformation-templates" xmlns:ddic="http://www.sap.com/abapxml/types/dictionary" xmlns:def="http://www.sap.com/abapxml/types/defined">
-  <tt:root name="NAME"/>
   <tt:root name="CONSTANTS" type="ddic:ZABAK_XML_K_T"/>
   <tt:template>
     <object>
       <object name="abak">
-        <tt:cond>
-          <str name="name">
-            <tt:value ref=".NAME"/>
-          </str>
-        </tt:cond>
         <array name="k">
           <tt:loop ref=".CONSTANTS">
             <object>

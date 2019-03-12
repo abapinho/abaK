@@ -33,10 +33,7 @@ METHOD get_data.
   DATA: s_zabak TYPE zabak,
         content TYPE string,
         o_data  TYPE REF TO zif_abak_data,
-        s_data  TYPE zabak_data,
-        t_k     TYPE zabak_k_t,
-        t_xml_k TYPE zabak_xml_k_t,
-        name    TYPE string.
+        t_xml_k TYPE zabak_xml_k_t.
 
   SELECT SINGLE * FROM zabak INTO s_zabak WHERE id = i_id.
   IF sy-subrc <> 0.
@@ -56,18 +53,9 @@ METHOD get_data.
                                                          i_content      = content ).
 
   t_xml_k = k_to_xml_k( o_data->get_data( ) ).
-  name = o_data->get_name( ).
   CALL TRANSFORMATION zabak_content_rfc
     SOURCE constants = t_xml_k
-           name      = name
     RESULT XML r_serialized.
-
-*  s_data-t_k = o_data->get_data( ).
-*  s_data-name = o_data->get_name( ).
-*
-*  CALL TRANSFORMATION zabak_format_xml
-*  SOURCE root = s_data
-*  RESULT XML r_serialized.
 
 ENDMETHOD.
 

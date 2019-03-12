@@ -33,6 +33,12 @@
     </item>
     <item>
      <ID>S</ID>
+     <KEY>P_SET</KEY>
+     <ENTRY>Set (GS03)</ENTRY>
+     <LENGTH>18</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
      <KEY>P_XML</KEY>
      <ENTRY>XML</ENTRY>
      <LENGTH>11</LENGTH>
@@ -40,8 +46,8 @@
     <item>
      <ID>S</ID>
      <KEY>P_ZABAK</KEY>
-     <ENTRY>ZABAK (Database)</ENTRY>
-     <LENGTH>24</LENGTH>
+     <ENTRY>ZABAK (ID=DEMO: Database)</ENTRY>
+     <LENGTH>33</LENGTH>
     </item>
    </TPOOL>
   </asx:values>
