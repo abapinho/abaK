@@ -1,4 +1,4 @@
-(abaK is now in beta stage. Its API is now stable and will probably not change. But more tests need to be done so please don't use it in a production environment yet. Wait for a non-beta release.)
+(abaK is now in beta stage. It's mostly stable but its API can still change and more tests need to be done so please don't use it in a production environment yet. Wait for a non-beta release.)
 
 # abaK
 
