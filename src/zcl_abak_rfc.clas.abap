@@ -30,10 +30,11 @@ CLASS ZCL_ABAK_RFC IMPLEMENTATION.
 
 METHOD get_data.
 
-  DATA: s_zabak TYPE zabak,
-        content TYPE string,
-        o_data  TYPE REF TO zif_abak_data,
-        t_xml_k TYPE zabak_xml_k_t.
+  DATA: s_zabak        TYPE zabak,
+        content        TYPE string,
+        o_data         TYPE REF TO zif_abak_data,
+        o_data_factory TYPE REF TO zcl_abak_data_factory,
+        t_xml_k        TYPE zabak_xml_k_t.
 
   SELECT SINGLE * FROM zabak INTO s_zabak WHERE id = i_id.
   IF sy-subrc <> 0.
@@ -48,9 +49,10 @@ METHOD get_data.
 
   content = s_zabak-content.
 
-  o_data = zcl_abak_data_factory=>get_standard_instance( i_format_type  = s_zabak-format_type
-                                                         i_content_type = s_zabak-content_type
-                                                         i_content      = content ).
+  CREATE OBJECT o_data_factory.
+  o_data = o_data_factory->get_standard_instance( i_format_type  = s_zabak-format_type
+                                                  i_content_type = s_zabak-content_type
+                                                  i_content      = content ).
 
   t_xml_k = k_to_xml_k( o_data->get_data( ) ).
   CALL TRANSFORMATION zabak_content_rfc

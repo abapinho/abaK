@@ -25,11 +25,27 @@ private section.
   data G_URL type STRING .
   data G_PROXY_HOST type STRING .
   data G_PROXY_SERVICE type STRING .
+  constants GC_REGEX_URL type STRING value '^(?:https?|ftp):\/\/[\w\-\.]+\.[\w]{2,4}[\w\/+=%&_\.~?\-]*$'. "#EC NOTEXT
+
+  methods CHECK_URL
+    importing
+      !I_URL type STRING
+    raising
+      ZCX_ABAK .
 ENDCLASS.
 
 
 
 CLASS ZCL_ABAK_CONTENT_URL IMPLEMENTATION.
+
+
+METHOD check_url.
+  DATA: o_tools TYPE REF TO zcl_abak_tools.
+
+  CREATE OBJECT o_tools.
+  o_tools->check_against_regex( i_regex = gc_regex_url
+                                i_value = i_url ).
+ENDMETHOD.
 
 
   METHOD constructor.
@@ -41,6 +57,8 @@ CLASS ZCL_ABAK_CONTENT_URL IMPLEMENTATION.
     ENDIF.
 
     super->constructor( ).
+
+    check_url( i_url ).
 
     g_url = i_url.
     g_proxy_host = i_proxy_host.

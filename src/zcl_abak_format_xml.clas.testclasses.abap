@@ -14,6 +14,7 @@ CLASS lcl_unittest DEFINITION FOR TESTING
     METHODS: get_inline_value FOR TESTING RAISING zcx_abak.
     METHODS: get_value FOR TESTING RAISING zcx_abak.
     METHODS: get_range_line FOR TESTING RAISING zcx_abak.
+    METHODS: get_type FOR TESTING RAISING zcx_abak.
 ENDCLASS.       "lcl_Unittest
 
 
@@ -71,7 +72,11 @@ CLASS lcl_unittest IMPLEMENTATION.
                                         act = <s_kv>-sign ).
     cl_abap_unit_assert=>assert_equals( exp = 'BT'
                                         act = <s_kv>-option ).
+  ENDMETHOD.
 
+  METHOD get_type.
+    cl_abap_unit_assert=>assert_equals( exp = zif_abak_consts=>format_type-xml
+                                        act = f_cut->zif_abak_format~get_type( ) ).
   ENDMETHOD.
 
 ENDCLASS.       "lcl_Unittest

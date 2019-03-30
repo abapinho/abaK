@@ -8,7 +8,7 @@
     <TABCLASS>TRANSP</TABCLASS>
     <CLIDEP>X</CLIDEP>
     <LANGDEP>X</LANGDEP>
-    <DDTEXT>ABAK Default constants table (no transport request)</DDTEXT>
+    <DDTEXT>abaK Default constants table (no transport request)</DDTEXT>
     <MAINFLAG>X</MAINFLAG>
     <CONTFLAG>A</CONTFLAG>
     <EXCLASS>1</EXCLASS>
@@ -31,7 +31,7 @@
      <PRECFIELD>ZABAK_DB_KEY</PRECFIELD>
      <NOTNULL>X</NOTNULL>
      <MASK>      S</MASK>
-     <DDTEXT>ABAK Data key</DDTEXT>
+     <DDTEXT>abaK Database key</DDTEXT>
      <COMPTYPE>S</COMPTYPE>
     </DD03P>
     <DD03P>
@@ -42,7 +42,7 @@
      <ADMINFIELD>0</ADMINFIELD>
      <PRECFIELD>ZABAK_DB_FIELDS</PRECFIELD>
      <MASK>      S</MASK>
-     <DDTEXT>ABAPK Data fields</DDTEXT>
+     <DDTEXT>abaK Database fields</DDTEXT>
      <COMPTYPE>S</COMPTYPE>
     </DD03P>
    </DD03P_TABLE>

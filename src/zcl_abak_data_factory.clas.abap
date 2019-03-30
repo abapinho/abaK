@@ -5,7 +5,7 @@ class ZCL_ABAK_DATA_FACTORY definition
 
 public section.
 
-  class-methods GET_STANDARD_INSTANCE
+  methods GET_STANDARD_INSTANCE
     importing
       !I_FORMAT_TYPE type ZABAK_FORMAT_TYPE
       !I_CONTENT_TYPE type ZABAK_CONTENT_TYPE
@@ -16,7 +16,7 @@ public section.
       value(RO_INSTANCE) type ref to ZIF_ABAK_DATA
     raising
       ZCX_ABAK .
-  class-methods GET_CUSTOM_INSTANCE
+  methods GET_CUSTOM_INSTANCE
     importing
       !IO_FORMAT type ref to ZIF_ABAK_FORMAT
       !IO_CONTENT type ref to ZIF_ABAK_CONTENT
@@ -41,7 +41,10 @@ CLASS ZCL_ABAK_DATA_FACTORY IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD GET_STANDARD_INSTANCE.
+  METHOD get_standard_instance.
+    DATA: o_content_factory TYPE REF TO zcl_abak_content_factory,
+          o_format_factory  type ref to zcl_abak_format_factory.
+
     IF i_format_type IS INITIAL OR i_content_type IS INITIAL OR i_content IS INITIAL.
       RAISE EXCEPTION TYPE zcx_abak
         EXPORTING
@@ -66,11 +69,13 @@ CLASS ZCL_ABAK_DATA_FACTORY IMPLEMENTATION.
           i_content_type = i_content_type
           i_content      = i_content.
     ELSE.
+      CREATE OBJECT o_content_factory.
+      create object o_format_factory.
       CREATE OBJECT ro_instance TYPE zcl_abak_data_normal
         EXPORTING
-          io_format = zcl_abak_format_factory=>get_instance( i_format_type )
-          io_content = zcl_abak_content_factory=>get_instance( i_content_type = i_content_type
-                                                               i_content      = i_content ).
+          io_format = o_format_factory->get_instance( i_format_type )
+          io_content = o_content_factory->get_instance( i_content_type = i_content_type
+                                                        i_content      = i_content ).
     ENDIF.
 
     IF i_bypass_cache IS INITIAL.

@@ -13,6 +13,7 @@ CLASS lcl_unittest DEFINITION FOR TESTING
     METHODS: invalid_id FOR TESTING.
     METHODS: empty_id FOR TESTING.
     METHODS: valid FOR TESTING RAISING zcx_abak.
+    METHODS: get_type FOR TESTING RAISING zcx_abak.
 ENDCLASS.       "lcl_Unittest
 
 
@@ -68,6 +69,16 @@ CLASS lcl_unittest IMPLEMENTATION.
     cl_abap_unit_assert=>assert_differs( exp = 0
                                          act = lines( t_k ) ).
 
+  ENDMETHOD.
+
+  METHOD get_type.
+    CREATE OBJECT f_cut
+      EXPORTING
+        i_id      = 'UNITTESTS'
+        i_rfcdest = space.
+
+    cl_abap_unit_assert=>assert_equals( exp = zif_abak_consts=>content_type-rfc
+                                        act = f_cut->zif_abak_content~get_type( ) ).
   ENDMETHOD.
 
 ENDCLASS.       "lcl_Unittest

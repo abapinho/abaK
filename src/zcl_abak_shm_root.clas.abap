@@ -60,11 +60,14 @@ CLASS ZCL_ABAK_SHM_ROOT IMPLEMENTATION.
 
 
   METHOD load_data.
-    DATA o_data TYPE REF TO zif_abak_data.
+    DATA: o_data         TYPE REF TO zif_abak_data,
+          o_data_factory TYPE REF TO zcl_abak_data_factory.
+
     IF g_loaded IS INITIAL.
-      o_data = zcl_abak_data_factory=>get_standard_instance( i_format_type  = g_format_type
-                                                             i_content_type = g_content_type
-                                                             i_content      = g_content ).
+      CREATE OBJECT o_data_factory.
+      o_data = o_data_factory->get_standard_instance( i_format_type  = g_format_type
+                                                      i_content_type = g_content_type
+                                                      i_content      = g_content ).
 
       gt_k = o_data->get_data( ).
       g_loaded = abap_true.

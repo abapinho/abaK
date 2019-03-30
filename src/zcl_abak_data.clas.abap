@@ -1,13 +1,13 @@
-CLASS zcl_abak_data DEFINITION
-  PUBLIC
-  ABSTRACT
-  CREATE PUBLIC
+class ZCL_ABAK_DATA definition
+  public
+  abstract
+  create public
 
-  GLOBAL FRIENDS zcl_abak_factory .
+  global friends ZCL_ABAK_FACTORY .
 
-  PUBLIC SECTION.
+public section.
 
-    INTERFACES zif_abak_data .
+  interfaces ZIF_ABAK_DATA .
 protected section.
 
   methods LOAD_DATA_AUX

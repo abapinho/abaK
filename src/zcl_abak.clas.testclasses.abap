@@ -32,19 +32,24 @@ CLASS lcl_unittest DEFINITION FOR TESTING
     METHODS: get_range_nok FOR TESTING.
     METHODS: get_range_if_exists FOR TESTING.
 
+    METHODS: null_data FOR TESTING.
+
 ENDCLASS.       "lcl_Unit_Test
 
 
 CLASS lcl_unittest IMPLEMENTATION.
 
   METHOD setup.
+    DATA: o_data_factory TYPE REF TO zcl_abak_data_factory.
+
     generate_test_data( ).
 
+    CREATE OBJECT o_data_factory.
     CREATE OBJECT f_cut
       EXPORTING
-        io_data = zcl_abak_data_factory=>get_standard_instance( i_format_type  = zif_abak_consts=>format_type-internal
-                                                                i_content_type = zif_abak_consts=>content_type-database
-                                                                i_content      = gc_tablename-valid ).
+        io_data = o_data_factory->get_standard_instance( i_format_type  = zif_abak_consts=>format_type-internal
+                                                         i_content_type = zif_abak_consts=>content_type-database
+                                                         i_content      = gc_tablename-valid ).
 
     f_iut = f_cut.
 
@@ -216,5 +221,17 @@ CLASS lcl_unittest IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.       "get_Value
+
+  METHOD null_data.
+    DATA: o_data TYPE REF TO zif_abak_data.
+    TRY.
+        CREATE OBJECT f_cut
+          EXPORTING
+            io_data = o_data.
+        cl_abap_unit_assert=>fail( msg = 'Null O_DATA should have been detected').
+      CATCH zcx_abak.
+        RETURN.
+    ENDTRY.
+  ENDMETHOD.
 
 ENDCLASS.       "lcl_Unit_Test

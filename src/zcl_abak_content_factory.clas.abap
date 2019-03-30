@@ -5,7 +5,7 @@ class ZCL_ABAK_CONTENT_FACTORY definition
 
 public section.
 
-  class-methods GET_INSTANCE
+  methods GET_INSTANCE
     importing
       !I_CONTENT_TYPE type ZABAK_CONTENT_TYPE
       !I_CONTENT type STRING
@@ -18,21 +18,21 @@ private section.
 
   constants GC_SO10_ID_DEFAULT type TDID value 'ST'. "#EC NOTEXT
 
-  class-methods GET_INSTANCE_SO10
+  methods GET_INSTANCE_SO10
     importing
       !I_CONTENT type STRING
     returning
       value(RO_CONTENT) type ref to ZIF_ABAK_CONTENT
     raising
       ZCX_ABAK .
-  class-methods GET_INSTANCE_SET
+  methods GET_INSTANCE_SET
     importing
       !I_CONTENT type STRING
     returning
       value(RO_CONTENT) type ref to ZIF_ABAK_CONTENT
     raising
       ZCX_ABAK .
-  class-methods GET_INSTANCE_RFC
+  methods GET_INSTANCE_RFC
     importing
       !I_CONTENT type STRING
     returning
@@ -147,20 +147,24 @@ METHOD get_instance_so10.
   ENDIF.
 
   language = o_params->get( 'LANGUAGE' ).
-
-  CALL FUNCTION 'CONVERSION_EXIT_ISOLA_INPUT'
-    EXPORTING
-      input            = language
-    IMPORTING
-      output           = spras
-    EXCEPTIONS
-      unknown_language = 1
-      OTHERS           = 2.
-  IF sy-subrc <> 0.
-    RAISE EXCEPTION TYPE zcx_abak
+  IF language IS NOT INITIAL.
+    CALL FUNCTION 'CONVERSION_EXIT_ISOLA_INPUT'
       EXPORTING
-        previous_from_syst = abap_true.
+        input            = language
+      IMPORTING
+        output           = spras
+      EXCEPTIONS
+        unknown_language = 1
+        OTHERS           = 2.
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE zcx_abak
+        EXPORTING
+          previous_from_syst = abap_true.
+    ENDIF.
+  ELSE.
+    spras = sy-langu.
   ENDIF.
+
 
   CREATE OBJECT ro_content TYPE zcl_abak_content_so10
     EXPORTING

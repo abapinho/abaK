@@ -41,11 +41,6 @@ private section.
       !I_NAMEVALUES type STRING
     raising
       ZCX_ABAK .
-  methods VALIDATE
-    importing
-      !I_NAMEVALUES type STRING
-    raising
-      ZCX_ABAK .
 ENDCLASS.
 
 
@@ -66,7 +61,11 @@ ENDMETHOD.
 
 
 METHOD constructor.
-  validate( i_params ).
+  data: o_tools type ref to zcl_abak_tools.
+
+  create object o_tools.
+  o_tools->check_against_regex( i_regex = gc_regex-namevalues
+                                i_value = i_params ).
   parse( i_namevalues = i_params ).
   check_against_definition( i_paramsdef ).
 ENDMETHOD.
@@ -140,32 +139,6 @@ METHOD parse.
 ENDMETHOD.
 
 
-METHOD VALIDATE.
-  DATA: o_matcher TYPE REF TO cl_abap_matcher,
-        o_exp     TYPE REF TO cx_root.
-
-  IF i_namevalues IS INITIAL.
-    RETURN.
-  ENDIF.
-
-  TRY.
-      o_matcher = cl_abap_matcher=>create( pattern       = gc_regex-namevalues
-                                           text          = i_namevalues
-                                           ignore_case   = abap_true ).
-
-      IF o_matcher->match( ) IS INITIAL.
-        RAISE EXCEPTION TYPE zcx_abak. " TODO
-      ENDIF.
-
-    CATCH cx_sy_regex cx_sy_matcher INTO o_exp.
-      RAISE EXCEPTION TYPE zcx_abak
-        EXPORTING
-          previous = o_exp.
-  ENDTRY.
-
-ENDMETHOD.
-
-
 METHOD zif_abak_params~get.
   DATA: upper_name LIKE i_name.
 
@@ -176,8 +149,6 @@ METHOD zif_abak_params~get.
   READ TABLE gt_namevalue ASSIGNING <s_namevalue> WITH KEY name = upper_name.
   IF sy-subrc = 0.
     r_value = <s_namevalue>-value.
-  ELSE.
-    RAISE EXCEPTION TYPE zcx_abak. " TODO
   ENDIF.
 
 ENDMETHOD.

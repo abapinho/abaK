@@ -5,7 +5,7 @@ class ZCL_ABAK_FORMAT_FACTORY definition
 
 public section.
 
-  class-methods GET_INSTANCE
+  methods GET_INSTANCE
     importing
       !I_FORMAT_TYPE type ZABAK_FORMAT_TYPE
     returning

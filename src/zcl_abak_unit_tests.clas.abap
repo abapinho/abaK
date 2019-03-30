@@ -1,11 +1,11 @@
-CLASS zcl_abak_unit_tests DEFINITION
-  PUBLIC
-  CREATE PUBLIC
-  RISK LEVEL HARMLESS
-  ABSTRACT
-  FOR TESTING.
+class ZCL_ABAK_UNIT_TESTS definition
+  public
+  abstract
+  create public
+  for testing
+  risk level harmless .
 
-  PUBLIC SECTION.
+public section.
   PROTECTED SECTION.
     CONSTANTS:
       BEGIN OF gc_tablename,

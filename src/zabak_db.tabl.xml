@@ -21,7 +21,7 @@
      <ADMINFIELD>0</ADMINFIELD>
      <PRECFIELD>ZABAK_DB_KEY</PRECFIELD>
      <MASK>      S</MASK>
-     <DDTEXT>ABAK Data key</DDTEXT>
+     <DDTEXT>abaK Database key</DDTEXT>
      <COMPTYPE>S</COMPTYPE>
     </DD03P>
     <DD03P>
@@ -32,7 +32,7 @@
      <ADMINFIELD>0</ADMINFIELD>
      <PRECFIELD>ZABAK_DB_FIELDS</PRECFIELD>
      <MASK>      S</MASK>
-     <DDTEXT>ABAPK Data fields</DDTEXT>
+     <DDTEXT>abaK Database fields</DDTEXT>
      <COMPTYPE>S</COMPTYPE>
     </DD03P>
    </DD03P_TABLE>
