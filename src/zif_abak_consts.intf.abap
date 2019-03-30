@@ -2,7 +2,7 @@ interface ZIF_ABAK_CONSTS
   public .
 
 
-  constants VERSION type STRING value '0.2b'. "#EC NOTEXT
+  constants VERSION type STRING value '0.21b'. "#EC NOTEXT
   constants:
     BEGIN OF content_type,
       database      TYPE zabak_content_type VALUE 'DB',
