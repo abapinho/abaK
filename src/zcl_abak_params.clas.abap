@@ -1,46 +1,46 @@
-class ZCL_ABAK_PARAMS definition
-  public
-  final
-  create private .
+CLASS zcl_abak_params DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PRIVATE .
 
-public section.
+  PUBLIC SECTION.
 
-  interfaces ZIF_ABAK_PARAMS .
+    INTERFACES zif_abak_params .
 
-  methods CONSTRUCTOR
-    importing
-      !I_PARAMS type STRING
-      !I_PARAMSDEF type STRING
-    raising
-      ZCX_ABAK .
-  class-methods CREATE_INSTANCE
-    importing
-      !I_PARAMS type STRING
-      !I_PARAMSDEF type STRING
-    returning
-      value(RO_PARAMS) type ref to ZIF_ABAK_PARAMS
-    raising
-      ZCX_ABAK .
-protected section.
-private section.
+    METHODS constructor
+      IMPORTING
+        !i_params TYPE string
+        !i_paramsdef TYPE string
+      RAISING
+        zcx_abak .
+    CLASS-METHODS create_instance
+      IMPORTING
+        !i_params TYPE string
+        !i_paramsdef TYPE string
+      RETURNING
+        value(ro_params) TYPE REF TO zif_abak_params
+      RAISING
+        zcx_abak .
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 
-  data GT_NAMEVALUE type ZABAK_NAMEVALUE_T .
-  constants:
-    BEGIN OF gc_regex,
-      namevalue  TYPE string VALUE '([a-z]\w*)=(\S*)',     ##NO_TEXT
-      namevalues TYPE string VALUE '^([a-z]\w*=\S*\s*)*$', ##NO_TEXT
-    END OF gc_regex .
+    DATA gt_namevalue TYPE zabak_namevalue_t .
+    CONSTANTS:
+      BEGIN OF gc_regex,
+        namevalue  TYPE string VALUE '([a-z]\w*)=(\S*)',     ##no_text
+        namevalues TYPE string VALUE '^([a-z]\w*=\S*\s*)*$', ##no_text
+      END OF gc_regex .
 
-  methods CHECK_AGAINST_DEFINITION
-    importing
-      !I_PARAMSDEF type STRING
-    raising
-      ZCX_ABAK .
-  methods PARSE
-    importing
-      !I_NAMEVALUES type STRING
-    raising
-      ZCX_ABAK .
+    METHODS check_against_definition
+      IMPORTING
+        !i_paramsdef TYPE string
+      RAISING
+        zcx_abak .
+    METHODS parse
+      IMPORTING
+        !i_namevalues TYPE string
+      RAISING
+        zcx_abak .
 ENDCLASS.
 
 
@@ -48,108 +48,111 @@ ENDCLASS.
 CLASS ZCL_ABAK_PARAMS IMPLEMENTATION.
 
 
-METHOD CHECK_AGAINST_DEFINITION.
-  DATA: o_params_definition TYPE REF TO zcl_abak_params_definition.
+  METHOD check_against_definition.
+    DATA: o_params_definition TYPE REF TO zcl_abak_params_definition.
 
-  CREATE OBJECT o_params_definition
-    EXPORTING
-      i_definition = i_paramsdef.
+    CREATE OBJECT o_params_definition
+      EXPORTING
+        i_definition = i_paramsdef.
 
-  o_params_definition->check_parameters( gt_namevalue ).
+    o_params_definition->check_parameters( gt_namevalue ).
 
-ENDMETHOD.
-
-
-METHOD constructor.
-  data: o_tools type ref to zcl_abak_tools.
-
-  create object o_tools.
-  o_tools->check_against_regex( i_regex = gc_regex-namevalues
-                                i_value = i_params ).
-  parse( i_namevalues = i_params ).
-  check_against_definition( i_paramsdef ).
-ENDMETHOD.
+  ENDMETHOD.
 
 
-METHOD create_instance.
-  CREATE OBJECT ro_params TYPE zcl_abak_params
-    EXPORTING
-      i_params    = i_params
-      i_paramsdef = i_paramsdef.
-ENDMETHOD.
+  METHOD constructor.
+    DATA: o_tools TYPE REF TO zcl_abak_tools.
+
+    CREATE OBJECT o_tools.
+    o_tools->check_against_regex( i_regex = gc_regex-namevalues
+                                  i_value = i_params ).
+    parse( i_namevalues = i_params ).
+    check_against_definition( i_paramsdef ).
+  ENDMETHOD.
 
 
-METHOD parse.
+  METHOD create_instance.
+    CREATE OBJECT ro_params TYPE zcl_abak_params
+      EXPORTING
+        i_params    = i_params
+        i_paramsdef = i_paramsdef.
+  ENDMETHOD.
 
-  DATA: o_matcher   TYPE REF TO cl_abap_matcher,
-        t_match     TYPE match_result_tab,
-        o_exp       TYPE REF TO cx_root,
-        s_namevalue LIKE LINE OF gt_namevalue,
-        str         TYPE char100.
 
-  FIELD-SYMBOLS: <s_match>    LIKE LINE OF t_match,
-                 <s_submatch> LIKE LINE OF <s_match>-submatches.
+  METHOD parse.
 
-  IF i_namevalues IS INITIAL.
-    RETURN.
-  ENDIF.
+    DATA: o_matcher   TYPE REF TO cl_abap_matcher,
+          t_match     TYPE match_result_tab,
+          o_exp       TYPE REF TO cx_root,
+          s_namevalue LIKE LINE OF gt_namevalue,
+          str         TYPE char100.
 
-  TRY.
-      o_matcher = cl_abap_matcher=>create( pattern       = gc_regex-namevalue
-                                           text          = i_namevalues
-                                           ignore_case   = abap_true ).
+    FIELD-SYMBOLS: <s_match>    LIKE LINE OF t_match,
+                   <s_submatch> LIKE LINE OF <s_match>-submatches.
 
-      t_match = o_matcher->find_all( ).
+    IF i_namevalues IS INITIAL.
+      RETURN.
+    ENDIF.
 
-      LOOP AT t_match ASSIGNING <s_match>.
-        CLEAR s_namevalue.
+    TRY.
+        o_matcher = cl_abap_matcher=>create( pattern       = gc_regex-namevalue
+                                             text          = i_namevalues
+                                             ignore_case   = abap_true ).
 
-        LOOP AT <s_match>-submatches ASSIGNING <s_submatch>. "#EC CI_NESTED
+        t_match = o_matcher->find_all( ).
 
-          str = i_namevalues+<s_submatch>-offset(<s_submatch>-length).
+        LOOP AT t_match ASSIGNING <s_match>.
+          CLEAR s_namevalue.
 
-          CASE sy-tabix.
-            WHEN 1. " Name
-              s_namevalue-name = str.
+          LOOP AT <s_match>-submatches ASSIGNING <s_submatch>. "#EC CI_NESTED
 
-            WHEN 2. " Value
-              s_namevalue-value = str.
+            str = i_namevalues+<s_submatch>-offset(<s_submatch>-length).
 
-            WHEN OTHERS.
-              RAISE EXCEPTION TYPE zcx_abak
-                EXPORTING
-                  textid = zcx_abak=>unexpected_error.
+            CASE sy-tabix.
+              WHEN 1. " Name
+                s_namevalue-name = str.
 
-          ENDCASE.
+              WHEN 2. " Value
+                s_namevalue-value = str.
 
+              WHEN OTHERS.
+                RAISE EXCEPTION TYPE zcx_abak
+                  EXPORTING
+                    textid = zcx_abak=>unexpected_error.
+
+            ENDCASE.
+
+          ENDLOOP.
+
+          INSERT s_namevalue INTO TABLE gt_namevalue.
+          IF sy-subrc <> 0.
+            RAISE EXCEPTION TYPE zcx_abak_params
+              EXPORTING
+                textid = zcx_abak_params=>duplicate
+                name   = s_namevalue-name.
+          ENDIF.
         ENDLOOP.
 
-        INSERT s_namevalue INTO TABLE gt_namevalue.
-        IF sy-subrc <> 0.
-          RAISE EXCEPTION TYPE zcx_abak. " TODO (Duplicate)
-        ENDIF.
-      ENDLOOP.
+      CATCH cx_sy_regex cx_sy_matcher INTO o_exp.
+        RAISE EXCEPTION TYPE zcx_abak
+          EXPORTING
+            previous = o_exp.
+    ENDTRY.
 
-    CATCH cx_sy_regex cx_sy_matcher INTO o_exp.
-      RAISE EXCEPTION TYPE zcx_abak
-        EXPORTING
-          previous = o_exp.
-  ENDTRY.
-
-ENDMETHOD.
+  ENDMETHOD.
 
 
-METHOD zif_abak_params~get.
-  DATA: upper_name LIKE i_name.
+  METHOD zif_abak_params~get.
+    DATA: upper_name LIKE i_name.
 
-  FIELD-SYMBOLS <s_namevalue> LIKE LINE OF gt_namevalue.
+    FIELD-SYMBOLS <s_namevalue> LIKE LINE OF gt_namevalue.
 
-  upper_name = to_upper( i_name ).
+    upper_name = to_upper( i_name ).
 
-  READ TABLE gt_namevalue ASSIGNING <s_namevalue> WITH KEY name = upper_name.
-  IF sy-subrc = 0.
-    r_value = <s_namevalue>-value.
-  ENDIF.
+    READ TABLE gt_namevalue ASSIGNING <s_namevalue> WITH KEY name = upper_name.
+    IF sy-subrc = 0.
+      r_value = <s_namevalue>-value.
+    ENDIF.
 
-ENDMETHOD.
+  ENDMETHOD.
 ENDCLASS.

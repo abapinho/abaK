@@ -44,7 +44,7 @@ CLASS lcl_unittest IMPLEMENTATION.
 
     CREATE OBJECT f_cut
       EXPORTING
-        i_definition = 'PARAM1'.
+        i_definition = '+PARAM1'.
 
     add( i_name  = 'PARAM1' i_value = '123' ).
 

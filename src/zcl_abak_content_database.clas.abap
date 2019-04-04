@@ -27,7 +27,7 @@ private section.
       !I_TABLENAME type STRING
     raising
       ZCX_ABAK .
-  methods SELECT
+  methods READ_DB
     importing
       !I_TABLENAME type TABNAME
     returning
@@ -100,11 +100,11 @@ ENDMETHOD.
 
 
 METHOD load.
-  DATA: t_k     TYPE zabak_k_t,
+  DATA: t_k       TYPE zabak_k_t,
         o_k_table TYPE REF TO zcl_abak_k_table.
 
   CREATE OBJECT o_k_table.
-  o_k_table->add_db_t( select( g_tablename ) ).
+  o_k_table->add_db_t( read_db( g_tablename ) ).
   t_k = o_k_table->get_k_t( ).
 
   CALL TRANSFORMATION zabak_copy
@@ -114,7 +114,7 @@ METHOD load.
 ENDMETHOD.
 
 
-METHOD SELECT.
+METHOD READ_DB.
   SELECT *
     FROM (i_tablename)
     INTO TABLE rt_db.

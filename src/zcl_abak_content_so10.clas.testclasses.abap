@@ -11,6 +11,7 @@ CLASS lcl_unittest DEFINITION FOR TESTING
 
     METHODS: setup RAISING zcx_abak.
     METHODS: invalid_text FOR TESTING.
+    METHODS: missing_params FOR TESTING.
     METHODS: read_xml FOR TESTING RAISING zcx_abak.
     METHODS: get_type FOR TESTING RAISING zcx_abak.
 ENDCLASS.       "lcl_Unittest
@@ -54,18 +55,50 @@ CLASS lcl_unittest IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD invalid_text.
-
     TRY.
         CREATE OBJECT f_cut
           EXPORTING
             i_name  = 'INVALID'
             i_id    = 'ST'
             i_spras = sy-langu.
-
         f_cut->zif_abak_content~get( ).
-
         cl_abap_unit_assert=>fail( msg = 'Invalid text should have raised exception' ).
+      CATCH zcx_abak.
+        RETURN.
+    ENDTRY.
+  ENDMETHOD.
 
+  METHOD missing_params.
+    TRY.
+        CREATE OBJECT f_cut
+          EXPORTING
+            i_name  = space
+            i_id    = 'ST'
+            i_spras = sy-langu.
+        f_cut->zif_abak_content~get( ).
+        cl_abap_unit_assert=>fail( msg = 'Missing name should have raised exception' ).
+      CATCH zcx_abak.
+        RETURN.
+    ENDTRY.
+    TRY.
+        CREATE OBJECT f_cut
+          EXPORTING
+            i_name  = gc_name
+            i_id    = space
+            i_spras = sy-langu.
+        f_cut->zif_abak_content~get( ).
+        cl_abap_unit_assert=>fail( msg = 'Missing id should have raised exception' ).
+      CATCH zcx_abak.
+        RETURN.
+    ENDTRY.
+    TRY.
+        CREATE OBJECT f_cut
+          EXPORTING
+            i_name  = gc_name
+            i_id    = 'ST'
+            i_spras = space.
+        f_cut->zif_abak_content~get( ).
+        cl_abap_unit_assert=>fail( msg = 'Missing language should have raised exception' ).
       CATCH zcx_abak.
         RETURN.
     ENDTRY.

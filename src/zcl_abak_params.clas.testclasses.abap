@@ -13,6 +13,7 @@ CLASS lcl_unittest DEFINITION FOR TESTING
     METHODS single_param FOR TESTING RAISING zcx_abak.
     METHODS two_params FOR TESTING RAISING zcx_abak.
     METHODS obligatory_missing FOR TESTING.
+    METHODS duplicate FOR TESTING.
     METHODS non_obligatory_missing FOR TESTING RAISING zcx_abak.
     METHODS invalid_param FOR TESTING.
     METHODS length_exceeded FOR TESTING.
@@ -74,6 +75,17 @@ CLASS lcl_unittest IMPLEMENTATION.
                                                   i_paramsdef = '+OBLIGATORY VALID' ).
 
         cl_abap_unit_assert=>fail( 'Obligatory parameter should have been detected').
+      CATCH zcx_abak.
+        RETURN.
+    ENDTRY.
+  ENDMETHOD.
+
+  METHOD duplicate.
+    TRY.
+        f_cut = zcl_abak_params=>create_instance( i_params    ='PARAM1=A PARAM1=B'
+                                                  i_paramsdef = 'PARAM1' ).
+
+        cl_abap_unit_assert=>fail( 'Duplicate parameter should have been detected').
       CATCH zcx_abak.
         RETURN.
     ENDTRY.
