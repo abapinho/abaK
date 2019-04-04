@@ -4,7 +4,6 @@
   <asx:values>
    <PROGDIR>
     <NAME>SAPLZABAK_MAINT</NAME>
-    <STATE>A</STATE>
     <SQLX>X</SQLX>
     <DBAPL>S</DBAPL>
     <DBNA>D$</DBNA>
