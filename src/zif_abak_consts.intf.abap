@@ -7,12 +7,12 @@ interface ZIF_ABAK_CONSTS
     BEGIN OF content_type,
       database      TYPE zabak_content_type VALUE 'DB',
       inline        TYPE zabak_content_type VALUE 'INLINE',
-      url           TYPE zabak_content_type VALUE 'URL',
-      standard_text TYPE zabak_content_type VALUE 'SO10',
-      set           TYPE zabak_content_type VALUE 'SET',
       file          TYPE zabak_content_type VALUE 'FILE',
+      mime          type zabak_content_type value 'MIME',
       rfc           TYPE zabak_content_type VALUE 'RFC',
-      custom        TYPE zabak_content_type VALUE 'CUSTOM',
+      set           TYPE zabak_content_type VALUE 'SET',
+      standard_text TYPE zabak_content_type VALUE 'SO10',
+      url           TYPE zabak_content_type VALUE 'URL',
     END OF content_type .
   constants:
     BEGIN OF format_type,
@@ -20,6 +20,5 @@ interface ZIF_ABAK_CONSTS
       xml      TYPE zabak_format_type VALUE 'XML',
       json     TYPE zabak_format_type VALUE 'JSON',
       csv      TYPE zabak_format_type VALUE 'CSV',
-      custom   TYPE zabak_format_type VALUE 'CUSTOM',
     END OF format_type .
 endinterface.
