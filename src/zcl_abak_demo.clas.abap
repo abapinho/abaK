@@ -124,7 +124,7 @@ METHOD generate_db_data.
     ENDLOOP.
   ENDLOOP.
 
-* Delete table content
+* Delete table contents
   DELETE FROM zabak_demo WHERE scope <> '1MPR0BABL3SC0P3'. "#EC CI_NOFIELD
 
   INSERT zabak_demo FROM TABLE t_data.
@@ -182,7 +182,7 @@ ENDMETHOD.
 
 METHOD GET_INSTANCE_STANDARD_DB.
   ro_abak = zcl_abak_factory=>get_standard_instance( i_format_type  = zif_abak_consts=>format_type-internal
-                                                     i_content_type = zif_abak_consts=>content_type-database
+                                                     i_source_type = zif_abak_consts=>source_type-database
                                                      i_content      = gc_demo_tablename ).
 ENDMETHOD.
 
@@ -194,7 +194,7 @@ METHOD get_instance_standard_xml.
 
   ro_abak = zcl_abak_factory=>get_standard_instance(
     i_format_type  = zif_abak_consts=>format_type-xml
-    i_content_type = zif_abak_consts=>content_type-inline
+    i_source_type = zif_abak_consts=>source_type-inline
     i_content      = xml ).
 ENDMETHOD.
 

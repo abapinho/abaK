@@ -23,7 +23,7 @@ CLASS lcl_unittest IMPLEMENTATION.
     CREATE OBJECT f_cut
       EXPORTING
         i_format_type = zif_abak_consts=>format_type-internal
-        i_content_type = zif_abak_consts=>content_type-database
+        i_source_type = zif_abak_consts=>source_type-database
         i_content = gc_tablename-valid.
 
   ENDMETHOD.

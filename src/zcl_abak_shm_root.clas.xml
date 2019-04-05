@@ -32,6 +32,12 @@
      <LANGU>E</LANGU>
      <DESCRIPT>General Flag</DESCRIPT>
     </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ABAK_SHM_ROOT</CLSNAME>
+     <CMPNAME>G_SOURCE_TYPE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>abaK Source type</DESCRIPT>
+    </SEOCOMPOTX>
    </DESCRIPTIONS>
   </asx:values>
  </asx:abap>

@@ -1,35 +1,35 @@
-class ZCL_ABAK_SHM_ROOT definition
-  public
-  final
-  create public
-  shared memory enabled .
+CLASS zcl_abak_shm_root DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC
+  SHARED MEMORY ENABLED .
 
-public section.
+  PUBLIC SECTION.
 
-  methods CONSTRUCTOR
-    importing
-      !I_FORMAT_TYPE type ZABAK_FORMAT_TYPE
-      !I_CONTENT_TYPE type ZABAK_CONTENT_TYPE
-      !I_CONTENT type STRING
-    raising
-      ZCX_ABAK .
-  methods GET_DATA
-    returning
-      value(RT_K) type ZABAK_K_T
-    raising
-      ZCX_ABAK .
+    METHODS constructor
+      IMPORTING
+        !i_format_type TYPE zabak_format_type
+        !i_source_type TYPE zabak_source_type
+        !i_content TYPE string
+      RAISING
+        zcx_abak .
+    METHODS get_data
+      RETURNING
+        value(rt_k) TYPE zabak_k_t
+      RAISING
+        zcx_abak .
   PROTECTED SECTION.
-PRIVATE SECTION.
+  PRIVATE SECTION.
 
-  DATA g_format_type TYPE zabak_format_type .
-  DATA g_content_type TYPE zabak_content_type .
-  DATA g_content TYPE string .
-  DATA gt_k TYPE zabak_k_t .
-  DATA g_loaded TYPE flag .
+    DATA g_format_type TYPE zabak_format_type .
+    DATA g_source_type TYPE zabak_source_type .
+    DATA g_content TYPE string .
+    DATA gt_k TYPE zabak_k_t .
+    DATA g_loaded TYPE flag .
 
-  METHODS load_data
-    RAISING
-      zcx_abak .
+    METHODS load_data
+      RAISING
+        zcx_abak .
 ENDCLASS.
 
 
@@ -40,7 +40,7 @@ CLASS ZCL_ABAK_SHM_ROOT IMPLEMENTATION.
   METHOD constructor.
 
     g_format_type = i_format_type.
-    g_content_type = i_content_type.
+    g_source_type = i_source_type.
     g_content = i_content.
 
     load_data( ).
@@ -50,7 +50,7 @@ CLASS ZCL_ABAK_SHM_ROOT IMPLEMENTATION.
 
   METHOD get_data.
 
-    LOG-POINT ID zabak SUBKEY 'shm_root.get_data' FIELDS g_format_type g_content_type g_content.
+    LOG-POINT ID zabak SUBKEY 'shm_root.get_data' FIELDS g_format_type g_source_type g_content.
 
     load_data( ).
 
@@ -66,7 +66,7 @@ CLASS ZCL_ABAK_SHM_ROOT IMPLEMENTATION.
     IF g_loaded IS INITIAL.
       CREATE OBJECT o_data_factory.
       o_data = o_data_factory->get_standard_instance( i_format_type  = g_format_type
-                                                      i_content_type = g_content_type
+                                                      i_source_type = g_source_type
                                                       i_content      = g_content ).
 
       gt_k = o_data->get_data( ).

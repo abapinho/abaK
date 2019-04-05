@@ -41,7 +41,7 @@ METHOD get_data.
     RAISE EXCEPTION TYPE zcx_abak. " TODO
   ENDIF.
 
-  IF s_zabak-format_type IS INITIAL OR s_zabak-content_type IS INITIAL OR s_zabak-content IS INITIAL.
+  IF s_zabak-format_type IS INITIAL OR s_zabak-source_type IS INITIAL OR s_zabak-content IS INITIAL.
     RAISE EXCEPTION TYPE zcx_abak
       EXPORTING
         textid = zcx_abak=>invalid_parameters.
@@ -50,9 +50,9 @@ METHOD get_data.
   content = s_zabak-content.
 
   CREATE OBJECT o_data_factory.
-  o_data = o_data_factory->get_standard_instance( i_format_type  = s_zabak-format_type
-                                                  i_content_type = s_zabak-content_type
-                                                  i_content      = content ).
+  o_data = o_data_factory->get_standard_instance( i_format_type = s_zabak-format_type
+                                                  i_source_type = s_zabak-source_type
+                                                  i_content     = content ).
 
   t_xml_k = k_to_xml_k( o_data->get_data( ) ).
   CALL TRANSFORMATION zabak_content_rfc
