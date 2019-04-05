@@ -11,7 +11,7 @@ public section.
   methods CONSTRUCTOR
     importing
       !IO_FORMAT type ref to ZIF_ABAK_FORMAT
-      !IO_CONTENT type ref to ZIF_ABAK_CONTENT
+      !IO_SOURCE type ref to zif_abak_source
     raising
       ZCX_ABAK .
 protected section.
@@ -23,7 +23,7 @@ protected section.
   PRIVATE SECTION.
 
     DATA go_format TYPE REF TO zif_abak_format .
-    DATA go_content TYPE REF TO zif_abak_content .
+    DATA go_source TYPE REF TO zif_abak_source .
 ENDCLASS.
 
 
@@ -35,24 +35,24 @@ CLASS ZCL_ABAK_DATA_NORMAL IMPLEMENTATION.
 
     super->constructor( ).
 
-    IF io_format IS NOT BOUND OR io_content IS NOT BOUND.
+    IF io_format IS NOT BOUND OR IO_SOURCE IS NOT BOUND.
       RAISE EXCEPTION TYPE zcx_abak
         EXPORTING
           textid = zcx_abak=>invalid_parameters.
     ENDIF.
 
     go_format = io_format.
-    go_content = io_content.
+    go_source = IO_SOURCE.
 
   ENDMETHOD.
 
 
   METHOD invalidate_aux.
-    go_content->invalidate( ).
+    go_source->invalidate( ).
   ENDMETHOD.
 
 
 METHOD load_data_aux.
-  rt_k = go_format->convert( go_content->get( ) ).
+  rt_k = go_format->convert( go_source->get( ) ).
 ENDMETHOD.
 ENDCLASS.

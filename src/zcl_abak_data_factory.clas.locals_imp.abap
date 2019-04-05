@@ -8,7 +8,7 @@ CLASS lcl_cache DEFINITION FINAL.
       IMPORTING
         i_use_shm      TYPE flag
         i_format_type  TYPE zabak_format_type
-        i_content_type TYPE zabak_content_type
+        i_source_type TYPE zabak_source_type
         i_content      TYPE string
       RETURNING value(ro_instance) TYPE REF TO zif_abak_data.
 
@@ -16,7 +16,7 @@ CLASS lcl_cache DEFINITION FINAL.
       IMPORTING
         i_use_shm       TYPE flag
         i_format_type   TYPE zabak_format_type
-        i_content_type  TYPE zabak_content_type
+        i_source_type  TYPE zabak_source_type
         i_content       TYPE string
         io_instance     TYPE REF TO zif_abak_data
       RAISING
@@ -27,7 +27,7 @@ CLASS lcl_cache DEFINITION FINAL.
       BEGIN OF ty_s_instance,
         use_shm      TYPE flag,
         format_type  TYPE zabak_format_type,
-        content_type TYPE zabak_content_type,
+        source_type TYPE zabak_source_type,
         content      TYPE string,
         o_instance TYPE REF TO zif_abak_data,
       END OF ty_s_instance .
@@ -35,7 +35,7 @@ CLASS lcl_cache DEFINITION FINAL.
     TYPES:
       ty_t_instance
         TYPE SORTED TABLE OF ty_s_instance
-        WITH UNIQUE KEY use_shm format_type content_type content.
+        WITH UNIQUE KEY use_shm format_type source_type content.
 
     CLASS-DATA gt_instance TYPE ty_t_instance .
 ENDCLASS.
@@ -47,7 +47,7 @@ CLASS lcl_cache IMPLEMENTATION.
     READ TABLE gt_instance ASSIGNING <s_instance>
       WITH KEY use_shm = i_use_shm
                format_type = i_format_type
-               content_type = i_content_type
+               source_type = i_source_type
                content = i_content.
     IF sy-subrc = 0.
       ro_instance = <s_instance>-o_instance.
@@ -59,7 +59,7 @@ CLASS lcl_cache IMPLEMENTATION.
 
     s_instance-use_shm = i_use_shm.
     s_instance-format_type = i_format_type.
-    s_instance-content_type = i_content_type.
+    s_instance-source_type = i_source_type.
     s_instance-content = i_content.
     s_instance-o_instance = io_instance.
     INSERT s_instance INTO TABLE gt_instance.

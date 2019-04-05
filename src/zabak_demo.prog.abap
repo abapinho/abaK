@@ -37,9 +37,10 @@ DATA: go_exp     TYPE REF TO zcx_abak,
       which_demo TYPE string,
       txt        TYPE string.
 
-START-OF-SELECTION.
+INITIALIZATION.
+  sy-title = |{ sy-title } (v{ zif_abak_consts=>version })|.
 
-  sy-title = |{ sy-title } (version { zif_abak_consts=>version })|.
+START-OF-SELECTION.
 
   CASE abap_true.
     WHEN p_db.

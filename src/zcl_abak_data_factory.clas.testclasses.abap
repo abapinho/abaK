@@ -36,7 +36,7 @@ CLASS lcl_unittest IMPLEMENTATION.
   METHOD standard_normal.
     o_data = f_cut->get_standard_instance(
         i_format_type  = zif_abak_consts=>format_type-xml
-        i_content_type = zif_abak_consts=>content_type-inline
+        i_source_type = zif_abak_consts=>source_type-inline
         i_content      = 'dummy' ).
     check_class( 'ZCL_ABAK_DATA_NORMAL' ).
   ENDMETHOD.
@@ -44,7 +44,7 @@ CLASS lcl_unittest IMPLEMENTATION.
   METHOD standard_sho.
     o_data = f_cut->get_standard_instance(
         i_format_type  = zif_abak_consts=>format_type-xml
-        i_content_type = zif_abak_consts=>content_type-inline
+        i_source_type = zif_abak_consts=>source_type-inline
         i_content      = 'dummy'
         i_use_shm      = abap_true ).
     check_class( 'ZCL_ABAK_DATA_SHM' ).
@@ -52,14 +52,14 @@ CLASS lcl_unittest IMPLEMENTATION.
 
   METHOD custom.
     DATA: o_format_factory TYPE REF TO zcl_abak_format_factory,
-          o_content_factory TYPE REF TO zcl_abak_content_factory.
+          o_source_factory TYPE REF TO zcl_abak_source_factory.
 
     CREATE OBJECT o_format_factory.
-    CREATE OBJECT o_content_factory.
+    CREATE OBJECT o_source_factory.
     o_data = f_cut->get_custom_instance(
-        io_format   = o_format_factory->get_instance( zif_abak_consts=>format_type-xml )
-        io_content  = o_content_factory->get_instance( i_content_type = zif_abak_consts=>content_type-inline
-                                                       i_content      = 'dummy' ) ).
+        io_format = o_format_factory->get_instance( zif_abak_consts=>format_type-xml )
+        io_source = o_source_factory->get_instance( i_source_type = zif_abak_consts=>source_type-inline
+                                                    i_content      = 'dummy' ) ).
     check_class( 'ZCL_ABAK_DATA_NORMAL' ).
   ENDMETHOD.
 
@@ -68,12 +68,12 @@ CLASS lcl_unittest IMPLEMENTATION.
 
     o_data = f_cut->get_standard_instance(
         i_format_type  = zif_abak_consts=>format_type-xml
-        i_content_type = zif_abak_consts=>content_type-inline
+        i_source_type = zif_abak_consts=>source_type-inline
         i_content      = 'dummy' ).
 
     o_data2 = f_cut->get_standard_instance(
         i_format_type  = zif_abak_consts=>format_type-xml
-        i_content_type = zif_abak_consts=>content_type-inline
+        i_source_type = zif_abak_consts=>source_type-inline
         i_content      = 'dummy'
         i_bypass_cache = abap_false ).
 
@@ -86,12 +86,12 @@ CLASS lcl_unittest IMPLEMENTATION.
 
     o_data = f_cut->get_standard_instance(
         i_format_type  = zif_abak_consts=>format_type-xml
-        i_content_type = zif_abak_consts=>content_type-inline
+        i_source_type = zif_abak_consts=>source_type-inline
         i_content      = 'dummy' ).
 
     o_data2 = f_cut->get_standard_instance(
         i_format_type  = zif_abak_consts=>format_type-xml
-        i_content_type = zif_abak_consts=>content_type-inline
+        i_source_type = zif_abak_consts=>source_type-inline
         i_content      = 'dummy'
         i_bypass_cache = abap_true ).
 

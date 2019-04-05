@@ -18,18 +18,18 @@ ENDCLASS.       "lcl_Unittest
 CLASS lcl_unittest IMPLEMENTATION.
 
   METHOD setup.
-    DATA: o_content_factory TYPE REF TO zcl_abak_content_factory,
+    DATA: o_source_factory TYPE REF TO zcl_abak_source_factory,
           o_format_factory  TYPE REF TO zcl_abak_format_factory.
 
     generate_test_data( ).
 
-    CREATE OBJECT o_content_factory.
+    CREATE OBJECT o_source_factory.
     CREATE OBJECT o_format_factory.
     CREATE OBJECT f_cut
       EXPORTING
         io_format = o_format_factory->get_instance( zif_abak_consts=>format_type-internal )
-        io_content = o_content_factory->get_instance( i_content_type = zif_abak_consts=>content_type-database
-                                                      i_content      = gc_tablename-valid ).
+        io_source = o_source_factory->get_instance( i_source_type  = zif_abak_consts=>source_type-database
+                                                    i_content      = gc_tablename-valid ).
   ENDMETHOD.
 
   METHOD read_valid.

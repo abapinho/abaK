@@ -1,53 +1,53 @@
-class ZCL_ABAK_DATA_SHM definition
-  public
-  inheriting from ZCL_ABAK_DATA
-  final
-  create public
+CLASS zcl_abak_data_shm DEFINITION
+  PUBLIC
+  INHERITING FROM zcl_abak_data
+  FINAL
+  CREATE PUBLIC
 
-  global friends ZCL_ABAK_FACTORY .
+  GLOBAL FRIENDS zcl_abak_factory .
 
-public section.
+  PUBLIC SECTION.
 
-  methods CONSTRUCTOR
-    importing
-      !I_FORMAT_TYPE type ZABAK_FORMAT_TYPE optional
-      !I_CONTENT_TYPE type ZABAK_CONTENT_TYPE optional
-      !I_CONTENT type STRING optional
-    raising
-      ZCX_ABAK .
+    METHODS constructor
+      IMPORTING
+        !i_format_type TYPE zabak_format_type OPTIONAL
+        !i_source_type TYPE zabak_source_type OPTIONAL
+        !i_content TYPE string OPTIONAL
+      RAISING
+        zcx_abak .
   PROTECTED SECTION.
 
     METHODS invalidate_aux
       REDEFINITION .
     METHODS load_data_aux
       REDEFINITION .
-private section.
+  PRIVATE SECTION.
 
-  constants GC_MAX_INSTANCE_NAME type I value 80. "#EC NOTEXT
-  data G_FORMAT_TYPE type ZABAK_FORMAT_TYPE .
-  data G_CONTENT_TYPE type ZABAK_CONTENT_TYPE .
-  data G_CONTENT type STRING .
+    CONSTANTS gc_max_instance_name TYPE i VALUE 80.         "#EC NOTEXT
+    DATA g_format_type TYPE zabak_format_type .
+    DATA g_source_type TYPE zabak_source_type .
+    DATA g_content TYPE string .
 
-  methods READ_SHM
-    returning
-      value(RT_K) type ZABAK_K_T
-    raising
-      ZCX_ABAK
-      CX_SHM_NO_ACTIVE_VERSION
-      CX_SHM_INCONSISTENT .
-  methods WRITE_SHM
-    returning
-      value(RT_K) type ZABAK_K_T
-    raising
-      ZCX_ABAK .
-  methods GET_INSTANCE_NAME
-    returning
-      value(R_INSTANCE_NAME) type SHM_INST_NAME .
-  methods HASH
-    importing
-      !I_DATA type STRING
-    returning
-      value(R_HASHED) type STRING .
+    METHODS read_shm
+      RETURNING
+        value(rt_k) TYPE zabak_k_t
+      RAISING
+        zcx_abak
+        cx_shm_no_active_version
+        cx_shm_inconsistent .
+    METHODS write_shm
+      RETURNING
+        value(rt_k) TYPE zabak_k_t
+      RAISING
+        zcx_abak .
+    METHODS get_instance_name
+      RETURNING
+        value(r_instance_name) TYPE shm_inst_name .
+    METHODS hash
+      IMPORTING
+        !i_data TYPE string
+      RETURNING
+        value(r_hashed) TYPE string .
 ENDCLASS.
 
 
@@ -59,14 +59,14 @@ CLASS ZCL_ABAK_DATA_SHM IMPLEMENTATION.
 
     super->constructor( ).
 
-    IF i_format_type IS INITIAL OR i_content_type IS INITIAL OR i_content IS INITIAL.
+    IF i_format_type IS INITIAL OR i_source_type IS INITIAL OR i_content IS INITIAL.
       RAISE EXCEPTION TYPE zcx_abak
         EXPORTING
           textid = zcx_abak=>invalid_parameters.
     ENDIF.
 
     g_format_type = i_format_type.
-    g_content_type = i_content_type.
+    g_source_type = i_source_type.
     g_content = i_content.
 
   ENDMETHOD.
@@ -75,7 +75,7 @@ CLASS ZCL_ABAK_DATA_SHM IMPLEMENTATION.
   METHOD get_instance_name.
     DATA: instance_name TYPE string.
 
-    instance_name = |{ g_format_type }.{ g_content_type }.{ g_content }|.
+    instance_name = |{ g_format_type }.{ g_source_type }.{ g_content }|.
 
     IF strlen( instance_name ) <= gc_max_instance_name.
       r_instance_name = instance_name.
@@ -198,9 +198,9 @@ CLASS ZCL_ABAK_DATA_SHM IMPLEMENTATION.
         TRY.
             CREATE OBJECT o_root AREA HANDLE o_broker
               EXPORTING
-                i_format_type  = g_format_type
-                i_content_type = g_content_type
-                i_content      = g_content.
+                i_format_type = g_format_type
+                i_source_type = g_source_type
+                i_content     = g_content.
 
             o_broker->set_root( o_root ).
             rt_k = o_root->get_data( ).

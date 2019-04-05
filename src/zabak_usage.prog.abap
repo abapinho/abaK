@@ -28,8 +28,10 @@ REPORT zabak_usage.
 
 DATA: go_usage TYPE REF TO zcl_abak_usage.
 
-START-OF-SELECTION.
+INITIALIZATION.
+  PERFORM append_version_to_title.
 
+START-OF-SELECTION.
   CREATE OBJECT go_usage.
 
   PERFORM list_subclasses.
@@ -37,6 +39,10 @@ START-OF-SELECTION.
   PERFORM list_zabak.
   SKIP.
   PERFORM list_where_used.
+
+FORM append_version_to_title.
+  sy-title = |{ sy-title } (v{ zif_abak_consts=>version })|.
+ENDFORM.
 
 FORM list_subclasses.
   DATA: t_class TYPE seo_class_names,
