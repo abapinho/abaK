@@ -27,8 +27,8 @@ CLASS zcl_abak_params DEFINITION
     DATA gt_namevalue TYPE zabak_namevalue_t .
     CONSTANTS:
       BEGIN OF gc_regex,
-        namevalue  TYPE string VALUE '([a-z]\w*)=(\S*)',     ##no_text
-        namevalues TYPE string VALUE '^([a-z]\w*=\S*\s*)*$', ##no_text
+        namevalue  TYPE string VALUE '([a-z]\w*)=(\S*)',     ##NO_TEXT
+        namevalues TYPE string VALUE '^([a-z]\w*=\S*\s*)*$', ##NO_TEXT
       END OF gc_regex .
 
     METHODS check_against_definition

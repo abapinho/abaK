@@ -47,9 +47,9 @@ CLASS lcl_unittest IMPLEMENTATION.
     CREATE OBJECT o_data_factory.
     CREATE OBJECT f_cut
       EXPORTING
-        io_data = o_data_factory->get_standard_instance( i_format_type  = zif_abak_consts=>format_type-internal
-                                                         i_content_type = zif_abak_consts=>content_type-database
-                                                         i_content      = gc_tablename-valid ).
+        io_data = o_data_factory->get_standard_instance( i_format_type = zif_abak_consts=>format_type-internal
+                                                         i_source_type = zif_abak_consts=>source_type-database
+                                                         i_content     = gc_tablename-valid ).
 
     f_iut = f_cut.
 
