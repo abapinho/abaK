@@ -871,7 +871,7 @@
        <CONT_NAME>TCTRL_ZABAK_DEFAULT</CONT_NAME>
        <TYPE>TEXT</TYPE>
        <NAME>*ZABAK_DEFAULT-FIELDNAME</NAME>
-       <TEXT>Field_name______________________________</TEXT>
+       <TEXT>Fieldname_______________________________</TEXT>
        <LINE>001</LINE>
        <COLUMN>002</COLUMN>
        <LENGTH>040</LENGTH>
@@ -1034,7 +1034,6 @@
        <FORMAT>CHAR</FORMAT>
        <FROM_DICT>X</FROM_DICT>
        <MODIFIC>X</MODIFIC>
-       <PARAM_ID>DFD</PARAM_ID>
        <FOREIGNKEY>X</FOREIGNKEY>
        <OUTPUT_FLD>X</OUTPUT_FLD>
        <REQU_ENTRY>N</REQU_ENTRY>

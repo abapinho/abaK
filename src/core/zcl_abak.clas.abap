@@ -22,7 +22,7 @@ public section.
     METHODS get_value_aux
       IMPORTING
         value(i_scope) TYPE zabak_scope
-        value(i_fieldname) TYPE name_feld
+        value(i_fieldname) TYPE ZABAK_FIELDNAME
         value(i_context) TYPE any
       RETURNING
         value(r_value) TYPE zabak_low
@@ -36,7 +36,7 @@ public section.
     METHODS check_value_aux
       IMPORTING
         value(i_scope) TYPE zabak_scope
-        value(i_fieldname) TYPE name_feld
+        value(i_fieldname) TYPE ZABAK_FIELDNAME
         value(i_context) TYPE any
         value(i_value) TYPE any
       RETURNING
@@ -46,7 +46,7 @@ public section.
     METHODS get_range_aux
       IMPORTING
         value(i_scope) TYPE zabak_scope
-        value(i_fieldname) TYPE name_feld
+        value(i_fieldname) TYPE ZABAK_FIELDNAME
         value(i_context) TYPE any
       RETURNING
         value(rr_range) TYPE zabak_range_t

@@ -8,7 +8,7 @@ public section.
   methods ADD_KV
     importing
       !I_SCOPE type ZABAK_SCOPE optional
-      !I_FIELDNAME type FELDNAM
+      !I_FIELDNAME type ZABAK_FIELDNAME
       !I_CONTEXT type ZABAK_CONTEXT optional
       !I_SIGN type BAPISIGN default 'I'
       !I_OPTION type BAPIOPTION default 'EQ'
@@ -37,7 +37,7 @@ private section.
   methods CREATE_K_LINE
     importing
       !I_SCOPE type ZABAK_SCOPE
-      !I_FIELDNAME type FELDNAM
+      !I_FIELDNAME type ZABAK_FIELDNAME
       !I_CONTEXT type ZABAK_CONTEXT .
 ENDCLASS.
 
