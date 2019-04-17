@@ -108,7 +108,7 @@ CLASS ZCL_ABAK_SOURCE_FACTORY IMPLEMENTATION.
     DATA: o_params TYPE REF TO zif_abak_params,
           context  TYPE zabak_context,
           scope    TYPE zabak_scope,
-          setid    TYPE setid,
+          setnr    TYPE zabak_setnr,
           setclass TYPE setclass.
 
     o_params = zcl_abak_params=>create_instance( i_params    = i_content
@@ -116,7 +116,7 @@ CLASS ZCL_ABAK_SOURCE_FACTORY IMPLEMENTATION.
 
     scope = o_params->get( 'SCOPE' ).
     context = o_params->get( 'CONTEXT' ).
-    setid = o_params->get( 'ID' ).
+    setnr = o_params->get( 'ID' ).
     setclass = o_params->get( 'CLASS' ).
 
     CREATE OBJECT ro_content TYPE zcl_abak_source_set
@@ -124,7 +124,7 @@ CLASS ZCL_ABAK_SOURCE_FACTORY IMPLEMENTATION.
         i_context  = context
         i_scope    = scope
         i_setclass = setclass
-        i_setid    = setid.
+        i_setnr    = setnr.
 
   ENDMETHOD.
 

@@ -51,7 +51,7 @@ CLASS ZCL_ABAK_SOURCE_SO10 IMPLEMENTATION.
 
   METHOD load.
 
-    DATA: t_line   TYPE tline_t.
+    DATA: t_line   TYPE STANDARD TABLE OF tline.
 
     FIELD-SYMBOLS: <s_line> LIKE LINE OF t_line.
 

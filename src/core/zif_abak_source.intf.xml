@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOINTERF>
-    <CLSNAME>ZIF_ABAK_FORMAT</CLSNAME>
+    <CLSNAME>ZIF_ABAK_SOURCE</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>ABAK Source interface</DESCRIPT>
+    <DESCRIPT>abaK Source interface</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>

@@ -4,8 +4,8 @@
   <asx:values>
    <PINF>
     <ATTRIBUTES>
-     <INTF_NAME>ZABAK_API</INTF_NAME>
-     <DESCRIPT>abaK API</DESCRIPT>
+     <INTF_NAME>ZABAK_FORMATS_API</INTF_NAME>
+     <DESCRIPT>abaK Formats API</DESCRIPT>
     </ATTRIBUTES>
    </PINF>
   </asx:values>

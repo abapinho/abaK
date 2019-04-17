@@ -8,7 +8,7 @@ CLASS zcl_abak_source_set DEFINITION
 
     METHODS constructor
       IMPORTING
-        !i_setid TYPE setid
+        !i_setnr TYPE zabak_setnr
         !i_setclass TYPE setclass
         !i_scope TYPE zabak_scope
         !i_context TYPE zabak_context
@@ -26,7 +26,7 @@ CLASS zcl_abak_source_set DEFINITION
     TYPES:
       ty_t_rgsb4 TYPE STANDARD TABLE OF rgsb4 WITH KEY setnr .
 
-    DATA g_setid TYPE setid .
+    DATA g_setnr TYPE zabak_setnr .
     DATA g_setclass TYPE setclass .
     DATA g_scope TYPE zabak_scope .
     DATA g_context TYPE zabak_context .
@@ -56,7 +56,7 @@ CLASS ZCL_ABAK_SOURCE_SET IMPLEMENTATION.
 
 * TODO Validate parameters
 
-    g_setid = i_setid.
+    g_setnr = i_setnr.
     g_setclass = i_setclass.
     g_scope = i_scope.
     g_context = i_scope.
@@ -78,7 +78,7 @@ CLASS ZCL_ABAK_SOURCE_SET IMPLEMENTATION.
   METHOD read_set.
     CALL FUNCTION 'G_SET_GET_ALL_VALUES'
       EXPORTING
-        setnr         = g_setid
+        setnr         = g_setnr
         class         = g_setclass
       TABLES
         set_values    = rt_rgsb4

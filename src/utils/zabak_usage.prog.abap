@@ -48,8 +48,8 @@ FORM list_subclasses.
   DATA: t_class TYPE seo_class_names,
         class   LIKE LINE OF t_class.
 
-  WRITE / 'Content classes (implementing ZIF_ABAK_CONTENT):'.
-  t_class = go_usage->get_subclasses( 'ZIF_ABAK_CONTENT' ).
+  WRITE / 'Content classes (implementing ZIF_ABAK_SOURCE):'.
+  t_class = go_usage->get_subclasses( 'ZIF_ABAK_SOURCE' ).
   SORT t_class.
   LOOP AT t_class INTO class.
     WRITE: /4 class INTENSIFIED OFF.

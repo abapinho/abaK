@@ -146,6 +146,8 @@ METHOD get_zabak_instance_rfc.
   DATA: o_data         TYPE REF TO zif_abak_data,
         o_data_factory TYPE REF TO zcl_abak_data_factory.
 
+  CREATE OBJECT o_data_factory.
+
   o_data = o_data_factory->get_standard_instance(
       i_format_type  = zif_abak_consts=>format_type-internal
       i_source_type = zif_abak_consts=>source_type-rfc
