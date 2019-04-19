@@ -67,18 +67,24 @@ FORM list_subclasses.
 ENDFORM.
 
 FORM list_where_used.
-  DATA: t_tadir TYPE tt_tadir.
+  DATA: t_tadir TYPE tt_tadir,
+        exp_abak TYPE REF TO zcx_abak.
+
   FIELD-SYMBOLS: <s_tadir> LIKE LINE OF t_tadir.
 
   WRITE : / 'abaK usage (objects using class ZCL_ABAK_FACTORY outside the abaK package):'.
   FORMAT INTENSIFIED OFF.
-  t_tadir = go_usage->get_where_used( ).
-  LOOP AT t_tadir ASSIGNING <s_tadir>.
-    WRITE: /4 <s_tadir>-object, <s_tadir>-obj_name, <s_tadir>-devclass.
-  ENDLOOP.
-  IF sy-subrc <> 0.
-    WRITE: /4 'No objects found'.
-  ENDIF.
+  TRY.
+    t_tadir = go_usage->get_where_used( ).
+    LOOP AT t_tadir ASSIGNING <s_tadir>.
+      WRITE: /4 <s_tadir>-object, <s_tadir>-obj_name, <s_tadir>-devclass.
+    ENDLOOP.
+    IF sy-subrc <> 0.
+      WRITE: /4 'No objects found'.
+    ENDIF.
+  CATCH zcx_abak INTO exp_abak.
+    WRITE exp_abak->get_text( ).
+  ENDTRY.
   FORMAT INTENSIFIED ON.
 ENDFORM.
 

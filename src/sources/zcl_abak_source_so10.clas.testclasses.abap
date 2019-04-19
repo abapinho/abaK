@@ -21,7 +21,7 @@ CLASS lcl_unittest IMPLEMENTATION.
 
   METHOD setup.
     DATA: s_header TYPE thead,
-          t_line   TYPE tline_t,
+          t_line   TYPE tline_tab,
           s_line   LIKE LINE OF t_line.
 
     s_header-tdobject = 'TEXT'.

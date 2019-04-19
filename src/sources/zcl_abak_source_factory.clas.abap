@@ -25,13 +25,6 @@ CLASS zcl_abak_source_factory DEFINITION
         value(ro_content) TYPE REF TO zif_abak_source
       RAISING
         zcx_abak .
-    METHODS get_instance_set
-      IMPORTING
-        !i_content TYPE string
-      RETURNING
-        value(ro_content) TYPE REF TO zif_abak_source
-      RAISING
-        zcx_abak .
     METHODS get_instance_rfc
       IMPORTING
         !i_content TYPE string
@@ -68,9 +61,6 @@ CLASS ZCL_ABAK_SOURCE_FACTORY IMPLEMENTATION.
           EXPORTING
             i_tablename = i_content.
 
-      WHEN zif_abak_consts=>source_type-set.
-        ro_content = get_instance_set( i_content ).
-
       WHEN zif_abak_consts=>source_type-standard_text.
         ro_content = get_instance_so10( i_content ).
 
@@ -103,30 +93,6 @@ CLASS ZCL_ABAK_SOURCE_FACTORY IMPLEMENTATION.
 
   ENDMETHOD.
 
-
-  METHOD get_instance_set.
-    DATA: o_params TYPE REF TO zif_abak_params,
-          context  TYPE zabak_context,
-          scope    TYPE zabak_scope,
-          setnr    TYPE zabak_setnr,
-          setclass TYPE setclass.
-
-    o_params = zcl_abak_params=>create_instance( i_params    = i_content
-                                                 i_paramsdef = '+ID(34) +CLASS(4) SCOPE(40) CONTEXT(40)' ).
-
-    scope = o_params->get( 'SCOPE' ).
-    context = o_params->get( 'CONTEXT' ).
-    setnr = o_params->get( 'ID' ).
-    setclass = o_params->get( 'CLASS' ).
-
-    CREATE OBJECT ro_content TYPE zcl_abak_source_set
-      EXPORTING
-        i_context  = context
-        i_scope    = scope
-        i_setclass = setclass
-        i_setnr    = setnr.
-
-  ENDMETHOD.
 
 
   METHOD get_instance_so10.
