@@ -54,13 +54,6 @@
      <DOMVALUE_L>DB</DOMVALUE_L>
      <DDTEXT>Database</DDTEXT>
     </DD07V>
-    <DD07V>
-     <DOMNAME>ZABAK_SOURCE_TYPE</DOMNAME>
-     <VALPOS>0007</VALPOS>
-     <DDLANGUAGE>E</DDLANGUAGE>
-     <DOMVALUE_L>SET</DOMVALUE_L>
-     <DDTEXT>Set (GS03)</DDTEXT>
-    </DD07V>
    </DD07V_TAB>
   </asx:values>
  </asx:abap>
