@@ -10,7 +10,6 @@ interface ZIF_ABAK_CONSTS
       file          TYPE zabak_source_type VALUE 'FILE',
       mime          type zabak_source_type value 'MIME',
       rfc           TYPE zabak_source_type VALUE 'RFC',
-      set           TYPE zabak_source_type VALUE 'SET',
       standard_text TYPE zabak_source_type VALUE 'SO10',
       url           TYPE zabak_source_type VALUE 'URL',
     END OF source_type .

@@ -19,7 +19,6 @@ CLASS lcl_unittest DEFINITION FOR TESTING
     METHODS: database FOR TESTING RAISING zcx_abak.
     METHODS: file FOR TESTING RAISING zcx_abak.
     METHODS: rfc FOR TESTING RAISING zcx_abak.
-    METHODS: set FOR TESTING RAISING zcx_abak.
     METHODS: standard_text FOR TESTING RAISING zcx_abak.
     METHODS: url FOR TESTING RAISING zcx_abak.
     METHODS: invalid FOR TESTING.
@@ -59,12 +58,6 @@ CLASS lcl_unittest IMPLEMENTATION.
     o_content = f_cut->get_instance( i_source_type = zif_abak_consts=>source_type-rfc
                                      i_content      = 'RFCDEST=dummy ID=dummy' ).
     check_class( 'ZCL_ABAK_SOURCE_RFC' ).
-  ENDMETHOD.
-
-  METHOD set.
-    o_content = f_cut->get_instance( i_source_type = zif_abak_consts=>source_type-set
-                                     i_content      = 'ID=x CLASS=x' ).
-    check_class( 'ZCL_ABAK_SOURCE_SET' ).
   ENDMETHOD.
 
   METHOD standard_text.
