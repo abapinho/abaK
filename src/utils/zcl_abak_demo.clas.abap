@@ -39,11 +39,6 @@ private section.
   methods GENERATE_DB_DATA
     raising
       ZCX_ABAK .
-  methods GET_DEMO_XML
-    returning
-      value(R_XML) type STRING
-    raising
-      ZCX_ABAK .
   methods GET_INSTANCE_STANDARD_DB
     returning
       value(RO_ABAK) type ref to ZIF_ABAK
@@ -100,7 +95,8 @@ METHOD generate_db_data.
 * this way we're sure that both database and XML examples will be using
 * the same data.
 
-  DATA: t_data TYPE zabak_db_t,
+  DATA: o_tools TYPE REF TO zcl_abak_tools,
+        t_data TYPE zabak_db_t,
         s_data LIKE LINE OF t_data,
         o_format_xml TYPE REF TO zcl_abak_format_xml,
         t_k          TYPE zabak_k_t.
@@ -108,13 +104,14 @@ METHOD generate_db_data.
   FIELD-SYMBOLS: <s_k> LIKE LINE OF t_k,
                  <s_kv> LIKE LINE OF <s_k>-t_kv.
 
+  CREATE OBJECT o_tools.
   CREATE OBJECT o_format_xml.
-  t_k = o_format_xml->zif_abak_format~convert( get_demo_xml( ) ).
+  t_k = o_format_xml->zif_abak_format~convert( o_tools->get_demo_xml( ) ).
 
   LOOP AT t_k ASSIGNING <s_k>.
     MOVE-CORRESPONDING <s_k> TO s_data.
     CLEAR s_data-idx.
-    LOOP AT <s_k>-t_kv ASSIGNING <s_kv>. "#EC CI_NESTED
+    LOOP AT <s_k>-t_kv ASSIGNING <s_kv>.                 "#EC CI_NESTED
       ADD 1 TO s_data-idx.
       s_data-ue_sign = <s_kv>-sign.
       s_data-ue_option = <s_kv>-option.
@@ -161,25 +158,6 @@ METHOD get_customer_for_context.
 ENDMETHOD.
 
 
-METHOD get_demo_xml.
-* Even though storing constants in a separate file better than hard coding them
-* directly in the code, it would still be difficult for a functional person to maintain it.
-* This demo uses a XSLT to store the XML file just for simplicity sake. If you want to store
-* your constants in XML format make sure they are in a place which is both safe and yet easy
-* to maintain according to the project needs and your company standards.
-
-* Please bear in mind that with this example we are not advocating that constants should be
-* hard coded in the program. On the contrary. That defeats the whole purpose of this tool.
-* This is just a simpler way to package the demo data.
-
-  r_xml = |<abak/>|.
-
-  CALL TRANSFORMATION zabak_demo_xml
-    SOURCE XML r_xml
-    RESULT XML r_xml.
-ENDMETHOD.
-
-
 METHOD GET_INSTANCE_STANDARD_DB.
   ro_abak = zcl_abak_factory=>get_standard_instance( i_format_type  = zif_abak_consts=>format_type-internal
                                                      i_source_type = zif_abak_consts=>source_type-database
@@ -188,9 +166,12 @@ ENDMETHOD.
 
 
 METHOD get_instance_standard_xml.
-  DATA: xml TYPE string.
+  DATA: xml     TYPE string,
+        o_tools TYPE REF TO zcl_abak_tools.
 
-  xml = get_demo_xml( ).
+  CREATE OBJECT o_tools.
+
+  xml = o_tools->get_demo_xml( ).
 
   ro_abak = zcl_abak_factory=>get_standard_instance(
     i_format_type  = zif_abak_consts=>format_type-xml

@@ -92,6 +92,36 @@
      <MSGNR>013</MSGNR>
      <TEXT>Duplicate parameter &amp;</TEXT>
     </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>For multiple fields OPTION must be EQ</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>For multiple fields SIGN must be I</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>For multiple fields only one value line allowed</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>017</MSGNR>
+     <TEXT>For multiple fields HIGH must not be filled. Only LOW.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZABAK</ARBGB>
+     <MSGNR>018</MSGNR>
+     <TEXT>For multiple fieldnames we need a value per fieldname</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

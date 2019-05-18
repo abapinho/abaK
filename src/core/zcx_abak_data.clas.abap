@@ -51,6 +51,51 @@ public section.
       attr3 type scx_attrname value 'LOW',
       attr4 type scx_attrname value '',
     end of HIGH_MUST_BE_GT_LOW .
+  constants:
+    begin of MULTI_OPTION_NOT_EQ,
+      msgid type symsgid value 'ZABAK',
+      msgno type symsgno value '014',
+      attr1 type scx_attrname value '',
+      attr2 type scx_attrname value '',
+      attr3 type scx_attrname value '',
+      attr4 type scx_attrname value '',
+    end of MULTI_OPTION_NOT_EQ .
+  constants:
+    begin of MULTI_SIGN_NOT_I,
+      msgid type symsgid value 'ZABAK',
+      msgno type symsgno value '015',
+      attr1 type scx_attrname value '',
+      attr2 type scx_attrname value '',
+      attr3 type scx_attrname value '',
+      attr4 type scx_attrname value '',
+    end of MULTI_SIGN_NOT_I .
+  constants:
+    begin of MULTI_MANY_VALUES,
+      msgid type symsgid value 'ZABAK',
+      msgno type symsgno value '016',
+      attr1 type scx_attrname value '',
+      attr2 type scx_attrname value '',
+      attr3 type scx_attrname value '',
+      attr4 type scx_attrname value '',
+    end of MULTI_MANY_VALUES .
+  constants:
+    begin of MULTI_HIGH_FILLED,
+      msgid type symsgid value 'ZABAK',
+      msgno type symsgno value '017',
+      attr1 type scx_attrname value '',
+      attr2 type scx_attrname value '',
+      attr3 type scx_attrname value '',
+      attr4 type scx_attrname value '',
+    end of MULTI_HIGH_FILLED .
+  constants:
+    begin of MULTI_FIELDNAME_VALUE_MISMATCH,
+      msgid type symsgid value 'ZABAK',
+      msgno type symsgno value '018',
+      attr1 type scx_attrname value '',
+      attr2 type scx_attrname value '',
+      attr3 type scx_attrname value '',
+      attr4 type scx_attrname value '',
+    end of MULTI_FIELDNAME_VALUE_MISMATCH .
   data SIGN type BAPISIGN .
   data OPTION type BAPIOPTION .
   data LOW type ZABAK_LOW .

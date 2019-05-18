@@ -41,12 +41,26 @@ CLASS ZCL_ABAK_SOURCE_DATABASE IMPLEMENTATION.
 
   METHOD check_table.
     DATA: o_structdescr TYPE REF TO cl_abap_structdescr,
+          o_typedescr   TYPE REF TO cl_abap_typedescr,
           t_component   TYPE cl_abap_structdescr=>component_table,
           tablename     TYPE tabname.
 
     FIELD-SYMBOLS: <s_component> LIKE LINE OF t_component.
 
-    o_structdescr ?= cl_abap_structdescr=>describe_by_name( i_tablename ).
+    cl_abap_structdescr=>describe_by_name(
+      EXPORTING
+        p_name         = i_tablename
+      RECEIVING
+        p_descr_ref    = o_typedescr
+      EXCEPTIONS
+        type_not_found = 1
+        OTHERS         = 2 ).
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE zcx_abak
+        EXPORTING
+          previous_from_syst = abap_true.
+    ENDIF.
+    o_structdescr ?= o_typedescr.
     t_component = o_structdescr->get_components( ).
 
     tablename = i_tablename.

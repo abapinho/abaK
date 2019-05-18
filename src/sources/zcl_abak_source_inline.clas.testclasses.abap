@@ -1,6 +1,5 @@
 *"* use this source file for your ABAP unit test classes
 CLASS lcl_unittest DEFINITION FOR TESTING
-  INHERITING FROM zcl_abak_unit_tests
   DURATION SHORT
   RISK LEVEL HARMLESS
   FINAL.

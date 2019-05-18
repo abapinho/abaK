@@ -53,6 +53,11 @@ private section.
       !IS_K type ZABAK_K
     raising
       ZCX_ABAK .
+  methods CHECK_LINE_MULTI
+    importing
+      !IS_K type ZABAK_K
+    raising
+      ZCX_ABAK .
   methods LOAD_DATA
     raising
       ZCX_ABAK .
@@ -145,9 +150,67 @@ CLASS ZCL_ABAK_DATA IMPLEMENTATION.
 
       ENDCASE.
 
+*     Multiple fields: check if there are corresponding values and other checks
+      check_line_multi( is_k ).
+
     ENDLOOP.
 
   ENDMETHOD.
+
+
+METHOD check_line_multi.
+
+  DATA: t_fieldname TYPE STANDARD TABLE OF string,
+        t_value     TYPE STANDARD TABLE OF string.
+
+  FIELD-SYMBOLS: <s_kv> LIKE LINE OF is_k-t_kv.
+
+  SPLIT is_k-fieldname AT space INTO TABLE t_fieldname.
+
+* Only relevant for multiple fieldnames
+  IF lines( t_fieldname ) <= 1.
+    RETURN.
+  ENDIF.
+
+* Only one value line allowed (no ranges)
+  IF lines( is_k-t_kv ) <> 1.
+    RAISE EXCEPTION TYPE zcx_abak_data
+      EXPORTING
+        textid = zcx_abak_data=>multi_many_values.
+  ENDIF.
+
+  READ TABLE is_k-t_kv ASSIGNING <s_kv> INDEX 1.
+
+* Option must be EQ (no ranges)
+  IF <s_kv>-option <> gc_option-equal.
+    RAISE EXCEPTION TYPE zcx_abak_data
+      EXPORTING
+        textid = zcx_abak_data=>multi_option_not_eq.
+  ENDIF.
+
+* Sign must be I (no ranges)
+  IF <s_kv>-sign <> gc_sign-include.
+    RAISE EXCEPTION TYPE zcx_abak_data
+      EXPORTING
+        textid = zcx_abak_data=>multi_sign_not_i.
+  ENDIF.
+
+* High must be empty (no ranges)
+  IF <s_kv>-high IS NOT INITIAL.
+    RAISE EXCEPTION TYPE zcx_abak_data
+      EXPORTING
+        textid = zcx_abak_data=>high_must_be_empty.
+  ENDIF.
+
+* We need one value per field
+  SPLIT <s_kv>-low AT space INTO TABLE t_value.
+  IF lines( t_value ) <> lines( t_fieldname ).
+    RAISE EXCEPTION TYPE zcx_abak_data
+      EXPORTING
+        textid = zcx_abak_data=>multi_fieldname_value_mismatch.
+  ENDIF.
+
+ENDMETHOD.
 
 
 METHOD fill_defaults.

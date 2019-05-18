@@ -6,6 +6,7 @@
 
 <xsl:template match="/">
   <abak>
+    <k fieldname="BUKRS" value="5555"/>
     <k scope="GLOBAL" fieldname="BUKRS" value="4321"/>
     <k scope="PROJ1" fieldname="KOART">
       <v sign="I" option="EQ" low="D" />

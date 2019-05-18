@@ -1,6 +1,5 @@
 *"* use this source file for your ABAP unit test classes
 CLASS lcl_unittest DEFINITION FOR TESTING
-  INHERITING FROM zcl_abak_unit_tests
   DURATION SHORT
   RISK LEVEL HARMLESS
   FINAL.
@@ -18,14 +17,15 @@ ENDCLASS.       "lcl_Unittest
 CLASS lcl_unittest IMPLEMENTATION.
 
   METHOD setup.
-    generate_test_data( ).
+    DATA: o_tools TYPE REF TO zcl_abak_tools.
+
+    CREATE OBJECT o_tools.
 
     CREATE OBJECT f_cut
       EXPORTING
-        i_format_type = zif_abak_consts=>format_type-internal
-        i_source_type = zif_abak_consts=>source_type-database
-        i_content = gc_tablename-valid.
-
+        i_format_type = zif_abak_consts=>format_type-xml
+        i_source_type = zif_abak_consts=>source_type-inline
+        i_content     = o_tools->get_demo_xml( ).
   ENDMETHOD.
 
   METHOD read_valid.
