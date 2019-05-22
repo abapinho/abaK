@@ -30,6 +30,11 @@ CLASS lcl_unittest DEFINITION FOR TESTING
     METHODS: get_range_nok FOR TESTING.
     METHODS: get_range_if_exists FOR TESTING.
 
+    METHODS: get_multi_field_ok FOR TESTING RAISING zcx_abak.
+    METHODS: check_multi_field_ok FOR TESTING RAISING zcx_abak.
+    METHODS: get_range_multi_field_nok FOR TESTING.
+    METHODS: get_rangeif_multi_field_nok FOR TESTING.
+
     METHODS: null_data FOR TESTING.
 
 ENDCLASS.       "lcl_Unit_Test
@@ -44,7 +49,7 @@ CLASS lcl_unittest IMPLEMENTATION.
     CREATE OBJECT o_tools.
     CREATE OBJECT o_data_factory.
 
-    CREATE OBJECT f_iut type zcl_abak
+    CREATE OBJECT f_iut TYPE zcl_abak
       EXPORTING
         io_data = o_data_factory->get_standard_instance(
           i_format_type  = zif_abak_consts=>format_type-xml
@@ -211,7 +216,7 @@ CLASS lcl_unittest IMPLEMENTATION.
   ENDMETHOD.       "get_Value
 
   METHOD null_data.
-    DATA: o_cut type ref to zcl_abak,
+    DATA: o_cut TYPE REF TO zcl_abak,
           o_data TYPE REF TO zif_abak_data.
     TRY.
         CREATE OBJECT o_cut
@@ -222,5 +227,54 @@ CLASS lcl_unittest IMPLEMENTATION.
         RETURN.
     ENDTRY.
   ENDMETHOD.
+
+  METHOD get_multi_field_ok.
+    cl_abap_unit_assert=>assert_equals(
+      exp = '1234 EUR'
+      act = f_iut->get_value( i_scope     = '2FIELDS'
+                              i_fieldname = 'BUKRS WAERS' ) ).
+  ENDMETHOD.       "get_Value
+
+  METHOD check_multi_field_ok.
+    cl_abap_unit_assert=>assert_equals(
+      exp = abap_true
+      act = f_iut->check_value( i_scope     = '2FIELDS'
+                                i_fieldname = 'BUKRS WAERS'
+                                i_value     = '1234 EUR' ) ).
+
+    cl_abap_unit_assert=>assert_equals(
+      exp = abap_true
+      act = f_iut->check_value( i_scope     = '2FIELDS'
+                                i_fieldname = 'BUKRS WAERS'
+                                i_value     = '4321 USD' ) ).
+
+    cl_abap_unit_assert=>assert_equals(
+      exp = abap_false
+      act = f_iut->check_value( i_scope     = '2FIELDS'
+                                i_fieldname = 'BUKRS WAERS'
+                                i_value     = '4321 EUR' ) ).
+  ENDMETHOD.       "get_Value
+
+  METHOD get_range_multi_field_nok.
+*   Get range not valid for multi fields
+    TRY.
+        f_iut->get_range( i_scope     = '2FIELDS'
+                          i_fieldname = 'BUKRS WAERS' ).
+        cl_abap_unit_assert=>fail( msg = 'Multiple fields not possible for GET_RANGE' ).
+
+      CATCH zcx_abak.
+    ENDTRY.
+  ENDMETHOD.       "get_Value
+
+  METHOD get_rangeif_multi_field_nok.
+*   Get range not valid for multi fields
+    TRY.
+        f_iut->get_range_if_exists( i_scope     = '2FIELDS'
+                                    i_fieldname = 'BUKRS WAERS' ).
+        cl_abap_unit_assert=>fail( msg = 'Multiple fields not possible for GET_RANGE_IF_EXISTS' ).
+
+      CATCH zcx_abak.
+    ENDTRY.
+  ENDMETHOD.       "get_Value
 
 ENDCLASS.       "lcl_Unit_Test

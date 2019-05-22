@@ -23,6 +23,10 @@
       <v sign="I" option="EQ" low="EUR" />
       <v sign="I" option="EQ" low="USD" />
     </k>
+    <k scope="2FIELDS" fieldname="BUKRS WAERS">
+      <v sign="I" option="EQ" low="1234 EUR" />
+      <v sign="I" option="EQ" low="4321 USD" />
+    </k>
   </abak>
 </xsl:template>
 

@@ -66,6 +66,11 @@ private section.
       !CT_K type ZABAK_K_T
     raising
       ZCX_ABAK .
+  methods CHECK_SUBLINE
+    importing
+      !I_KV type ZABAK_KV
+    raising
+      ZCX_ABAK .
 ENDCLASS.
 
 
@@ -96,59 +101,7 @@ CLASS ZCL_ABAK_DATA IMPLEMENTATION.
 
     LOOP AT is_k-t_kv ASSIGNING <s_kv>.
 
-*     Validate sign
-      IF <s_kv>-sign CN 'IE'.
-        RAISE EXCEPTION TYPE zcx_abak_data
-          EXPORTING
-            textid = zcx_abak_data=>invalid_sign
-            sign   = <s_kv>-sign.
-      ENDIF.
-
-      CASE <s_kv>-option.
-        WHEN gc_option-equal OR
-             gc_option-not_equal OR
-             gc_option-contains_pattern OR
-             gc_option-does_not_contain_pattern OR
-             gc_option-greater_or_equal OR
-             gc_option-greater_than OR
-             gc_option-less_or_equal OR
-             gc_option-less_than.
-
-*         For single value operators HIGH must be empty
-          IF <s_kv>-high IS NOT INITIAL.
-            RAISE EXCEPTION TYPE zcx_abak_data
-              EXPORTING
-                textid = zcx_abak_data=>high_must_be_empty
-                option = <s_kv>-option.
-          ENDIF.
-
-        WHEN gc_option-between OR
-             gc_option-not_between.
-
-*         Two value operator must have high defined
-          IF <s_kv>-low IS INITIAL OR <s_kv>-high IS INITIAL.
-            RAISE EXCEPTION TYPE zcx_abak_data
-              EXPORTING
-                textid = zcx_abak_data=>low_high_must_be_filled
-                option = <s_kv>-option.
-          ENDIF.
-
-          IF <s_kv>-high < <s_kv>-low.
-            RAISE EXCEPTION TYPE zcx_abak_data
-              EXPORTING
-                textid = zcx_abak_data=>high_must_be_gt_low
-                option = <s_kv>-option
-                low    = <s_kv>-low
-                high   = <s_kv>-high.
-          ENDIF.
-
-        WHEN OTHERS.
-          RAISE EXCEPTION TYPE zcx_abak_data
-            EXPORTING
-              textid = zcx_abak_data=>invalid_option
-              option = <s_kv>-option.
-
-      ENDCASE.
+      check_subline( <s_kv> ).
 
 *     Multiple fields: check if there are corresponding values and other checks
       check_line_multi( is_k ).
@@ -170,13 +123,6 @@ METHOD check_line_multi.
 * Only relevant for multiple fieldnames
   IF lines( t_fieldname ) <= 1.
     RETURN.
-  ENDIF.
-
-* Only one value line allowed (no ranges)
-  IF lines( is_k-t_kv ) <> 1.
-    RAISE EXCEPTION TYPE zcx_abak_data
-      EXPORTING
-        textid = zcx_abak_data=>multi_many_values.
   ENDIF.
 
   READ TABLE is_k-t_kv ASSIGNING <s_kv> INDEX 1.
@@ -209,6 +155,65 @@ METHOD check_line_multi.
       EXPORTING
         textid = zcx_abak_data=>multi_fieldname_value_mismatch.
   ENDIF.
+
+ENDMETHOD.
+
+
+METHOD check_subline.
+
+* Validate sign
+  IF i_kv-sign CN 'IE'.
+    RAISE EXCEPTION TYPE zcx_abak_data
+      EXPORTING
+        textid = zcx_abak_data=>invalid_sign
+        sign   = i_kv-sign.
+  ENDIF.
+
+  CASE i_kv-option.
+    WHEN gc_option-equal OR
+         gc_option-not_equal OR
+         gc_option-contains_pattern OR
+         gc_option-does_not_contain_pattern OR
+         gc_option-greater_or_equal OR
+         gc_option-greater_than OR
+         gc_option-less_or_equal OR
+         gc_option-less_than.
+
+*         For single value operators HIGH must be empty
+      IF i_kv-high IS NOT INITIAL.
+        RAISE EXCEPTION TYPE zcx_abak_data
+          EXPORTING
+            textid = zcx_abak_data=>high_must_be_empty
+            option = i_kv-option.
+      ENDIF.
+
+    WHEN gc_option-between OR
+         gc_option-not_between.
+
+*         Two value operator must have high defined
+      IF i_kv-low IS INITIAL OR i_kv-high IS INITIAL.
+        RAISE EXCEPTION TYPE zcx_abak_data
+          EXPORTING
+            textid = zcx_abak_data=>low_high_must_be_filled
+            option = i_kv-option.
+      ENDIF.
+
+      IF i_kv-high < i_kv-low.
+        RAISE EXCEPTION TYPE zcx_abak_data
+          EXPORTING
+            textid = zcx_abak_data=>high_must_be_gt_low
+            option = i_kv-option
+            low    = i_kv-low
+            high   = i_kv-high.
+      ENDIF.
+
+    WHEN OTHERS.
+      RAISE EXCEPTION TYPE zcx_abak_data
+        EXPORTING
+          textid = zcx_abak_data=>invalid_option
+          option = i_kv-option.
+
+  ENDCASE.
 
 ENDMETHOD.
 

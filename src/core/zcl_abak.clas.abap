@@ -15,48 +15,64 @@ public section.
     raising
       ZCX_ABAK .
   PROTECTED SECTION.
-  PRIVATE SECTION.
+private section.
 
-    DATA go_data TYPE REF TO zif_abak_data .
+  data GO_DATA type ref to ZIF_ABAK_DATA .
 
-    METHODS get_value_aux
-      IMPORTING
-        value(i_scope) TYPE zabak_scope
-        value(i_fieldname) TYPE ZABAK_FIELDNAME
-        value(i_context) TYPE any
-      RETURNING
-        value(r_value) TYPE zabak_low
-      RAISING
-        zcx_abak .
-    METHODS convert_context
-      IMPORTING
-        !i_context TYPE any
-      RETURNING
-        value(r_context) TYPE zabak_context .
-    METHODS check_value_aux
-      IMPORTING
-        value(i_scope) TYPE zabak_scope
-        value(i_fieldname) TYPE ZABAK_FIELDNAME
-        value(i_context) TYPE any
-        value(i_value) TYPE any
-      RETURNING
-        value(r_result) TYPE flag
-      RAISING
-        zcx_abak .
-    METHODS get_range_aux
-      IMPORTING
-        value(i_scope) TYPE zabak_scope
-        value(i_fieldname) TYPE ZABAK_FIELDNAME
-        value(i_context) TYPE any
-      RETURNING
-        value(rr_range) TYPE zabak_range_t
-      RAISING
-        zcx_abak .
+  methods GET_VALUE_AUX
+    importing
+      value(I_SCOPE) type ZABAK_SCOPE
+      value(I_FIELDNAME) type ZABAK_FIELDNAME
+      value(I_CONTEXT) type ANY
+    returning
+      value(R_VALUE) type ZABAK_LOW
+    raising
+      ZCX_ABAK .
+  methods CONVERT_CONTEXT
+    importing
+      !I_CONTEXT type ANY
+    returning
+      value(R_CONTEXT) type ZABAK_CONTEXT .
+  methods CHECK_VALUE_AUX
+    importing
+      value(I_SCOPE) type ZABAK_SCOPE
+      value(I_FIELDNAME) type ZABAK_FIELDNAME
+      value(I_CONTEXT) type ANY
+      value(I_VALUE) type ANY
+    returning
+      value(R_RESULT) type FLAG
+    raising
+      ZCX_ABAK .
+  methods GET_RANGE_AUX
+    importing
+      value(I_SCOPE) type ZABAK_SCOPE
+      value(I_FIELDNAME) type ZABAK_FIELDNAME
+      value(I_CONTEXT) type ANY
+    returning
+      value(RR_RANGE) type ZABAK_RANGE_T
+    raising
+      ZCX_ABAK .
+  methods CHECK_RANGE_FIELDNAME
+    importing
+      !I_FIELDNAME type ZABAK_FIELDNAME
+    raising
+      ZCX_ABAK .
 ENDCLASS.
 
 
 
 CLASS ZCL_ABAK IMPLEMENTATION.
+
+
+METHOD check_range_fieldname.
+  DATA: t_field TYPE STANDARD TABLE OF string.
+
+*   Get range not possible for multiple fields
+  SPLIT i_fieldname AT space INTO TABLE t_field.
+  IF lines( t_field ) <> 1.
+    RAISE EXCEPTION TYPE zcx_abak_engine. " TODO
+  ENDIF.
+ENDMETHOD.
 
 
   METHOD check_value_aux.
@@ -94,9 +110,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
 
   METHOD get_range_aux.
-
-
-    DATA: t_kv TYPE zabak_kv_t,
+    DATA: t_kv    TYPE zabak_kv_t,
           context TYPE zabak_context.
 
     DATA: s_range LIKE LINE OF rr_range.
@@ -192,6 +206,8 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
     LOG-POINT ID zabak SUBKEY 'abak.get_range' FIELDS i_scope i_fieldname i_context.
 
+    check_range_fieldname( i_fieldname ).
+
     rr_range = get_range_aux( i_scope     = i_scope
                               i_fieldname = i_fieldname
                               i_context   = i_context ).
@@ -200,9 +216,7 @@ CLASS ZCL_ABAK IMPLEMENTATION.
 
 
   METHOD zif_abak~get_range_if_exists.
-
     TRY.
-
         LOG-POINT ID zabak SUBKEY 'abak.get_range_if_exists' FIELDS i_scope i_fieldname i_context.
 
         rr_range = get_range_aux( i_scope     = i_scope
@@ -212,7 +226,6 @@ CLASS ZCL_ABAK IMPLEMENTATION.
       CATCH zcx_abak.
         RETURN. " No problem if it does not exist
     ENDTRY.
-
   ENDMETHOD.
 
 
