@@ -83,9 +83,8 @@ CLASS lcl_unittest IMPLEMENTATION.
         f_iut->get_value( i_scope     = 'DOES_NOT_EXIST'
                           i_fieldname = 'BUKRS' ).
 
-        cl_abap_unit_assert=>fail( msg = 'Value does not exist and is not ignorable' ).
+        cl_abap_unit_assert=>fail( 'Value does not exist and is not ignorable' ).
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
 
   ENDMETHOD.       "get_Value
@@ -152,9 +151,8 @@ CLASS lcl_unittest IMPLEMENTATION.
                             i_fieldname = 'BUKRS'
                                                  i_value     = '0231' ).
 
-        cl_abap_unit_assert=>fail( msg = 'Value does not exist and is not ignorable' ).
+        cl_abap_unit_assert=>fail( 'Value does not exist and is not ignorable' ).
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
 
   ENDMETHOD.       "get_Value
@@ -183,7 +181,7 @@ CLASS lcl_unittest IMPLEMENTATION.
                                 i_fieldname = 'KOART' ).
 
     IF NOT ( 'D' IN r_koart AND 'K' IN r_koart ).
-      cl_abap_unit_assert=>fail( msg = 'Range should have D and K' ).
+      cl_abap_unit_assert=>fail( 'Range should have D and K' ).
     ENDIF.
 
   ENDMETHOD.       "get_Value
@@ -194,9 +192,8 @@ CLASS lcl_unittest IMPLEMENTATION.
         f_iut->get_range( i_scope     = 'DOES_NOT_EXIST'
                           i_fieldname = 'KOART' ).
 
-        cl_abap_unit_assert=>fail( msg = 'Range does not exist and is not ignorable' ).
+        cl_abap_unit_assert=>fail( 'Range does not exist and is not ignorable' ).
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
 
   ENDMETHOD.
@@ -205,12 +202,12 @@ CLASS lcl_unittest IMPLEMENTATION.
 
     IF 'D' NOT IN f_iut->get_range_if_exists( i_scope     = 'PROJ1'
                                               i_fieldname = 'KOART' ).
-      cl_abap_unit_assert=>fail( msg = 'Defined range should include D' ).
+      cl_abap_unit_assert=>fail( 'Defined range should include D' ).
     ENDIF.
 
     IF 'D' NOT IN f_iut->get_range_if_exists( i_scope     = 'DOES_NOT_EXIST'
                                               i_fieldname = 'KOART' ).
-      cl_abap_unit_assert=>fail( msg = 'Undefined range should be empty and ok because it is ignorable' ).
+      cl_abap_unit_assert=>fail( 'Undefined range should be empty and ok because it is ignorable' ).
     ENDIF.
 
   ENDMETHOD.       "get_Value
@@ -222,9 +219,8 @@ CLASS lcl_unittest IMPLEMENTATION.
         CREATE OBJECT o_cut
           EXPORTING
             io_data = o_data.
-        cl_abap_unit_assert=>fail( msg = 'Null O_DATA should have been detected').
+        cl_abap_unit_assert=>fail( 'Null O_DATA should have been detected').
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
   ENDMETHOD.
 
@@ -260,7 +256,7 @@ CLASS lcl_unittest IMPLEMENTATION.
     TRY.
         f_iut->get_range( i_scope     = '2FIELDS'
                           i_fieldname = 'BUKRS WAERS' ).
-        cl_abap_unit_assert=>fail( msg = 'Multiple fields not possible for GET_RANGE' ).
+        cl_abap_unit_assert=>fail( 'Multiple fields not possible for GET_RANGE' ).
 
       CATCH zcx_abak.
     ENDTRY.
@@ -271,7 +267,7 @@ CLASS lcl_unittest IMPLEMENTATION.
     TRY.
         f_iut->get_range_if_exists( i_scope     = '2FIELDS'
                                     i_fieldname = 'BUKRS WAERS' ).
-        cl_abap_unit_assert=>fail( msg = 'Multiple fields not possible for GET_RANGE_IF_EXISTS' ).
+        cl_abap_unit_assert=>fail( 'Multiple fields not possible for GET_RANGE_IF_EXISTS' ).
 
       CATCH zcx_abak.
     ENDTRY.

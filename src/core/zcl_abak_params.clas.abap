@@ -27,8 +27,8 @@ CLASS zcl_abak_params DEFINITION
     DATA gt_namevalue TYPE zabak_namevalue_t .
     CONSTANTS:
       BEGIN OF gc_regex,
-        namevalue  TYPE string VALUE '([a-z]\w*)=(\S*)',     ##NO_TEXT
-        namevalues TYPE string VALUE '^([a-z]\w*=\S*\s*)*$', ##NO_TEXT
+        namevalue  TYPE string VALUE '([a-z]\w*)=(\S*)',
+        namevalues TYPE string VALUE '^([a-z]\w*=\S*\s*)*$',
       END OF gc_regex .
 
     METHODS check_against_definition
@@ -66,7 +66,7 @@ CLASS ZCL_ABAK_PARAMS IMPLEMENTATION.
     CREATE OBJECT o_tools.
     o_tools->check_against_regex( i_regex = gc_regex-namevalues
                                   i_value = i_params ).
-    parse( i_namevalues = i_params ).
+    parse( i_params ).
     check_against_definition( i_paramsdef ).
   ENDMETHOD.
 

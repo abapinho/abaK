@@ -128,7 +128,7 @@ CLASS ZCL_ABAK_DATA_SHM IMPLEMENTATION.
             cx_sy_ref_is_initial
             cx_dynamic_check.
         "If the area does not exist, no need to invalidate it
-        RETURN.
+        CLEAR o_broker. " This is here so that this catch branch is not empty
 
     ENDTRY.
   ENDMETHOD.

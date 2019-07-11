@@ -31,7 +31,6 @@ CLASS lcl_unittest IMPLEMENTATION.
 
         cl_abap_unit_assert=>fail( 'Invalid syntax should have been detected' ).
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
   ENDMETHOD.
 
@@ -65,7 +64,6 @@ CLASS lcl_unittest IMPLEMENTATION.
 
         cl_abap_unit_assert=>fail( 'Should have failed with INVALID parameter ').
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
   ENDMETHOD.
 
@@ -76,7 +74,6 @@ CLASS lcl_unittest IMPLEMENTATION.
 
         cl_abap_unit_assert=>fail( 'Obligatory parameter should have been detected').
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
   ENDMETHOD.
 
@@ -87,7 +84,6 @@ CLASS lcl_unittest IMPLEMENTATION.
 
         cl_abap_unit_assert=>fail( 'Duplicate parameter should have been detected').
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
   ENDMETHOD.
 
@@ -104,7 +100,6 @@ CLASS lcl_unittest IMPLEMENTATION.
         cl_abap_unit_assert=>fail( 'Max length of 5 should have been detected').
 
       CATCH zcx_abak.
-        RETURN.
     ENDTRY.
   ENDMETHOD.
 

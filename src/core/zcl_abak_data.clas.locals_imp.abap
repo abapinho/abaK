@@ -26,6 +26,7 @@ CLASS lcl_data_for_utests IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD invalidate_aux.
+    RETURN.
   ENDMETHOD.
 
 ENDCLASS.

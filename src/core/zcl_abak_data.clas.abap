@@ -125,7 +125,7 @@ METHOD check_line_multi.
     RETURN.
   ENDIF.
 
-  READ TABLE is_k-t_kv ASSIGNING <s_kv> INDEX 1.
+  READ TABLE is_k-t_kv ASSIGNING <s_kv> INDEX 1. "#EC CI_SUBRC
 
 * Option must be EQ (no ranges)
   IF <s_kv>-option <> gc_option-equal.

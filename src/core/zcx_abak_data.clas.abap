@@ -70,24 +70,6 @@ public section.
       attr4 type scx_attrname value '',
     end of MULTI_SIGN_NOT_I .
   constants:
-    begin of MULTI_MANY_VALUES,
-      msgid type symsgid value 'ZABAK',
-      msgno type symsgno value '016',
-      attr1 type scx_attrname value '',
-      attr2 type scx_attrname value '',
-      attr3 type scx_attrname value '',
-      attr4 type scx_attrname value '',
-    end of MULTI_MANY_VALUES .
-  constants:
-    begin of MULTI_HIGH_FILLED,
-      msgid type symsgid value 'ZABAK',
-      msgno type symsgno value '017',
-      attr1 type scx_attrname value '',
-      attr2 type scx_attrname value '',
-      attr3 type scx_attrname value '',
-      attr4 type scx_attrname value '',
-    end of MULTI_HIGH_FILLED .
-  constants:
     begin of MULTI_FIELDNAME_VALUE_MISMATCH,
       msgid type symsgid value 'ZABAK',
       msgno type symsgno value '018',

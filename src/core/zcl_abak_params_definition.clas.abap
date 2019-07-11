@@ -29,8 +29,8 @@ private section.
 
   constants:
     BEGIN OF gc_regex,
-      paramdef  type string value '(\+?)([a-z]\w*)(\(\d{1,3}\))?', ##NO_TEXT
-      paramdefs type string value '(?:\+?)(?:[a-z]\w*)(?:\(\d{1,3}\))?(?: (?:\+?)(?:[a-z]\w*)(?:\(\d{1,3}\))?)*', ##NO_TEXT
+      paramdef  type string value '(\+?)([a-z]\w*)(\(\d{1,3}\))?',
+      paramdefs type string value '(?:\+?)(?:[a-z]\w*)(?:\(\d{1,3}\))?(?: (?:\+?)(?:[a-z]\w*)(?:\(\d{1,3}\))?)*',
     END OF gc_regex .
   data GT_PARAMDEF type TY_T_PARAMDEF .
 

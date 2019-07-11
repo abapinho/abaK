@@ -196,7 +196,7 @@ ENDMETHOD.
                                     i_value     = i_value ).
 
       CATCH zcx_abak.
-        RETURN. " No problem if it does not exist
+        CLEAR r_result. " No problem if it does not exist
     ENDTRY.
 
   ENDMETHOD.
@@ -224,7 +224,7 @@ ENDMETHOD.
                                   i_context   = i_context ).
 
       CATCH zcx_abak.
-        RETURN. " No problem if it does not exist
+        CLEAR rr_range. " No problem if it does not exist
     ENDTRY.
   ENDMETHOD.
 
@@ -250,7 +250,7 @@ ENDMETHOD.
                                  i_context   = i_context ).
 
       CATCH zcx_abak.
-        RETURN. " No problem if it does not exist
+        CLEAR r_value. " No problem if it does not exist
     ENDTRY.
 
   ENDMETHOD.

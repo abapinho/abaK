@@ -96,7 +96,7 @@ CLASS lcl_unittest IMPLEMENTATION.
         i_bypass_cache = abap_true ).
 
     IF o_data = o_data2.
-      cl_abap_unit_assert=>fail( msg = 'Instances should be different' ).
+      cl_abap_unit_assert=>fail( 'Instances should be different' ).
     ENDIF.
 
   ENDMETHOD.
