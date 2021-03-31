@@ -6,6 +6,7 @@
     <NAME>LZABAK_MAINTT00</NAME>
     <SUBC>I</SUBC>
     <RLOAD>E</RLOAD>
+    <UCCHECK>X</UCCHECK>
    </PROGDIR>
   </asx:values>
  </asx:abap>

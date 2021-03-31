@@ -34,17 +34,14 @@
        <PARAMETER>I_ID</PARAMETER>
        <KIND>P</KIND>
        <STEXT>abaK ID</STEXT>
-       <INDEX> 001</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>E_SERIALIZED_DATA</PARAMETER>
        <KIND>P</KIND>
-       <INDEX> 002</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>ERROR</PARAMETER>
        <KIND>X</KIND>
-       <INDEX> 003</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>
