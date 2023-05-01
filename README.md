@@ -17,11 +17,11 @@ With `abaK` you can finally stop developing a new `ZCONSTANTS` table every time 
 ## How
 abaK offers a simple yet powerful and flexible way for any program to manage its constants. Advantages of using abaK:
 - decentralized: there is no monolithic table holding all the constants. One program can decide to have its own constants source.
-- easily customized: a project can decide to have its constants maintainable directly in PRD while another may required them to be maintained in DEV and then transported;
+- easily customizable: a project can decide to have its constants maintainable directly in PRD while another may required them to be maintained in DEV and then transported;
 - multiple scopes: some constants can be used system-wide while others can belong to a single program and no one else will mess with them;
 - system-wide management: constant sources are registered in a central table so that it is easy to keep track of the existing data sources; 
 - different formats: besides using a custom database table, the constants data can be formatted as `CSV`, `XML` or `JSON`;
-- different content locations: besides providing it directly inline, content can be fetched from an `URL`, an `SO10` standard text, an `GS03` set, a server file or even another `abaK` instance in a remote SAP system via `RFC`; 
+- different content locations: besides providing content directly inline, it can be fetched from an `URL`, an `SO10` standard text, an `GS03` set, a server file or even another `abaK` instance in a remote SAP system via `RFC`; 
 - extensible: if needed, new custom `FORMAT`/`CONTENT` classes can be created (ex.: to read legacy data in a specific data format).  
 
 Providing a well-defined `API`, `abaK` clearly separates the way it is used from the way the constants are stored.
